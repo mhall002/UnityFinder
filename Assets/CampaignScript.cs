@@ -4,6 +4,7 @@ using System.Collections;
 public class CampaignScript : MonoBehaviour {
 
     public int CurrentRoom;
+    public 
 
 	// Use this for initialization
 	void Start () {

@@ -11,13 +11,7 @@ Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Manage
 Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.037 seconds
+- Completed reload, in  0.042 seconds
 desktop: 1920x1080 60Hz; virtual: 3600x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-UnloadTime: 0.378364 ms
-Unloading 3 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
-
-Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 120.
-Total: 1.742576 ms (FindLiveObjects: 0.016515 ms CreateObjectMapping: 0.009909 ms MarkObjects: 0.149543 ms  DeleteObjects: 0.005104 ms)
-

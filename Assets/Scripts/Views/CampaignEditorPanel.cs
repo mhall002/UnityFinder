@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class CampaignEditorPanel : MonoBehaviour {
+
     public ViewController ViewController;
+    public SessionManager SessionManager;
 
 	// Use this for initialization
     void Start()
@@ -31,7 +33,7 @@ public class CampaignEditorPanel : MonoBehaviour {
 
             if (GUI.Button(GetButtonRect(), "Host"))
             {
-
+                SessionManager.StartServer();
             }
             if (GUI.Button(GetButtonRect(), "Save"))
             {

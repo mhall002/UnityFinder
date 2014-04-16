@@ -3,8 +3,6 @@ using System.Collections;
 
 public class RoomView : MonoBehaviour {
 
-    public ViewController ViewController;
-
 	// Use this for initialization
 	void Start () {
 	
