@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1080</x>
+      <y>60</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Campaign
+--
+Characters: List&lt;Character&gt;
+RoomLinks: List&lt;int, int&gt;
+Rooms: Room[][]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1090</x>
+      <y>220</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Room
+--
+RID: int
+XPworth: int
+Visibility: int
+TerrainGrid: Terrain[][]
+EntityGrid: Entity[][]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>1160</x>
+      <y>110</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>800</x>
+      <y>580</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Character
+--
+HP: int
+Level: int
+Stats: Dictionary&lt;Stat, int&gt;
+States: List&lt;State&gt;
+Abilities: List&lt;Ability&gt;
+XPWorth: int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>800</x>
+      <y>390</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Entity
+--
+Name: String
+Description: String
+HiddenDescription: String
+ImageIdentifier: int
+Height: int
+Width: int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>870</x>
+      <y>490</y>
+      <w>50</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;90</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>510</x>
+      <y>680</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Ability
+--
+Name: String
+UsageLimitType: LimitType
+UsageLimit: int
+Uses: int
+Description: String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>690</x>
+      <y>610</y>
+      <w>130</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;110;110;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>800</x>
+      <y>760</y>
+      <w>210</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+PingColour: Colour
+XP: int
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>880</x>
+      <y>680</y>
+      <w>50</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>30;30;30;80</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>980</x>
+      <y>110</y>
+      <w>370</w>
+      <h>530</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>260;30;260;90;350;90;350;510;30;510</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>930</x>
+      <y>280</y>
+      <w>180</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>160;30;30;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>800</x>
+      <y>60</y>
+      <w>230</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Rules
+--
+int[] LevelRequirements
+--
+GetLevel(int xp): int
+GetLevel(Character character): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>490</x>
+      <y>60</y>
+      <w>270</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>MonsterStorage
+--
+GetMonster(String Name): Character
+GetRandomByLevel(int level): Character</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>290</x>
+      <y>260</y>
+      <w>260</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>RoomManager
+--
+Room: Room
+CombatState: Boolean
+ActivePings: Queue&lt;Ping&gt;
+--
+SetRoom(RID room)
+Ping(int x, int y)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>150</x>
+      <y>60</y>
+      <w>260</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>SessionManager
+--
+Players: List&lt;Characters&gt;
+ColourMap: Dictionary&lt;Player, Colour&gt;
+-CampaignManager
+--
+EnableHosting(): bool
+Save(): bool
+Load(String campaignName): bool
+SetActiveRoom(Room room)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>0</x>
+      <y>260</y>
+      <w>260</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>CampaignManager
+--
+Campaign: Campaign
+CurrentRoom: Room
+--
+SetRoom(RID rid)
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>510</x>
+      <y>450</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>RoomState
+--
+InCombat: bool
+CombatOrder: Queue&lt;Character&gt;
+Pings : Queue&lt;Ping&gt;
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>110</x>
+      <y>550</y>
+      <w>260</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Ping
+--
+StartTime : DateTime
+Character : Character
+Duration : Float</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>620</x>
+      <y>310</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Terrain
+--
+TerrainTypeID: int
+States : List&lt;State&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>800</x>
+      <y>250</y>
+      <w>310</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>290;30;30;100</additional_attributes>
+  </element>
+</diagram>
