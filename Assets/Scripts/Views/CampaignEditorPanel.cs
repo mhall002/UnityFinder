@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class CampaignEditorPanel : MonoBehaviour {
+    public ViewController ViewController;
 
 	// Use this for initialization
     void Start()
@@ -23,23 +24,25 @@ public class CampaignEditorPanel : MonoBehaviour {
 
     void OnGUI()
     {
-        x = Screen.width - 120;
-        y = 10;
-        GUI.Box(new Rect(x, 0, 120, 200), "Campaign Editor");
 
-        if (GUI.Button(GetButtonRect(), "Host"))
-        {
+            x = Screen.width - 120;
+            y = 10;
+            GUI.Box(new Rect(x, 0, 120, 200), "Campaign Editor");
 
-        }
-        if (GUI.Button(GetButtonRect(), "Save"))
-        {
+            if (GUI.Button(GetButtonRect(), "Host"))
+            {
 
-        }
-        if (GUI.Button(GetButtonRect(), "Load"))
-        {
+            }
+            if (GUI.Button(GetButtonRect(), "Save"))
+            {
 
-        }
-        GUI.Label(new Rect(x+ 10, y + 10, buttonWidth - 10, 20), "Players:");
+            }
+            if (GUI.Button(GetButtonRect(), "Load"))
+            {
+
+            }
+            GUI.Label(new Rect(x + 10, y + 10, buttonWidth - 10, 20), "Players:");
+
     }
 
 	// Update is called once per frame
