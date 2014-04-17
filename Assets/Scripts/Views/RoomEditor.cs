@@ -10,6 +10,7 @@ public class RoomEditor : MonoBehaviour {
 
     ICollection<Ground> Terrains;
 
+    public Ground SelectedTerrain = null;
 
 	// Use this for initialization
 	void Start () {
@@ -23,10 +24,14 @@ public class RoomEditor : MonoBehaviour {
         GUILayout.BeginArea(new Rect(Screen.width - 150, 0, 150, 500));
         GUILayout.BeginVertical("box");
         GUILayout.Button("Set as active room");
+        GUILayout.Label("Terrains:");
         GUILayout.BeginHorizontal("box");
         foreach (Ground terrain in Terrains)
         {
-            GUILayout.Button(SpriteStorage.GetTexture(terrain.TextureFile));
+            if (GUILayout.Button(SpriteStorage.GetTexture(terrain.TextureFile), GUILayout.Width(30), GUILayout.Height(30)))
+            {
+                SelectedTerrain = terrain;
+            }
         }
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
@@ -35,6 +40,9 @@ public class RoomEditor : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	
+	    if (Input.GetMouseButtonDown(1))
+        {
+            SelectedTerrain = null;
+        }
 	}
 }
