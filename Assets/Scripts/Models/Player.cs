@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Models
 {
-    class Player
+    public class Player
     {
         public string PlayerColour;
         public int XP;

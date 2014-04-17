@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Models
 {
-    class Ability
+    public class Ability
     {
         public string Name;
         public int UsageLimit;
@@ -14,7 +14,7 @@ namespace Assets.Scripts.Models
         public string Description;
     }
 
-    enum LimitType
+    public enum LimitType
     {
         Daily
     }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Models
 {
-    class Entity
+    public class Entity
     {
         public string Name;
         public string Description;
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Models
         public int XPWorth;
     }
 
-    enum EntityType
+    public enum EntityType
     {
         PlayerCharacter,
         NonPlayerCharacter

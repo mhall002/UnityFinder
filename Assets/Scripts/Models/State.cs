@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Assets.Scripts.Models
 {
-    class State
+    public class State
     {
-        string Description;
+        public string Name;
+        public string Description;
     }
 }

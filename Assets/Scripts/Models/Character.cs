@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Models
 {
-    class Character : Entity
+    public class Character : Entity
     {
         public int HP;
         public int Level;

@@ -5,6 +5,7 @@ public class MainMenuGUI : MonoBehaviour {
 
     public ViewController Controller;
     public SessionManager SessionManager;
+    public CampaignController CampaignController;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +14,8 @@ public class MainMenuGUI : MonoBehaviour {
 
     string[] Servers = null;
     bool WaitingForServers = false;
+    bool CreatingCampaign = false;
+    string campaignName = "Name";
     void OnGUI()
     {
         GUI.Box(new Rect(10, 10, 100, 120), "Start Menu");
@@ -35,7 +38,19 @@ public class MainMenuGUI : MonoBehaviour {
 
         if (GUI.Button(new Rect(20,100, 80, 20), "Create"))
         {
-            Controller.State = ViewController.ViewState.Campaign;
+            CreatingCampaign = true;
+        }
+
+        if (CreatingCampaign)
+        {
+            GUI.Box(new Rect(230, 10, 220, 120), "Create Campaign");
+            
+            campaignName = GUI.TextField(new Rect(240,40,200,30), campaignName);
+            if (GUI.Button(new Rect(240,100, 200, 20), "Create"))
+            {
+                CampaignController.CreateCampaign(campaignName);
+                Controller.State = ViewController.ViewState.Campaign;
+            }
         }
 
         if (Servers != null)

@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Assets.Scripts.Models
 {
-    class Terrain
+    public class Ground
     {
         public int TypeID;
         public List<State> States;
+        public string TextureFile;
     }
 }
