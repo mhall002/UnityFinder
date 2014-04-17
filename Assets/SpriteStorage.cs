@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class SpriteStorage : MonoBehaviour {
 
     public Dictionary<string, Sprite> Sprites = new Dictionary<string,Sprite>();
+    public Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,19 @@ public class SpriteStorage : MonoBehaviour {
             Debug.Log(Sprites[path] == null);
         }
         return Sprites[path];
+    }
+
+    public Texture GetTexture(string path)
+    {
+        if (!Textures.ContainsKey(path))
+        {
+            var obj = Resources.Load<Texture>("Sprites/" + path);
+            Debug.Log(obj == null);
+            Textures[path] = Resources.Load<Texture>("Sprites/" + path);
+            Debug.Log(path);
+            Debug.Log(Sprites[path] == null);
+        }
+        return Textures[path];
     }
 
 	// Update is called once per frame

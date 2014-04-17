@@ -7,6 +7,7 @@ namespace Assets.Scripts.Models
 {
     public class Ground
     {
+        public string Name;
         public int TypeID;
         public List<State> States;
         public string TextureFile;
