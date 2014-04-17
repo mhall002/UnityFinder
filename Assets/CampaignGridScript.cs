@@ -14,7 +14,7 @@ public class CampaignGridScript : MonoBehaviour {
             for (float y = -4.2f; y < 4.5f; y += spacing)
             {
                 GameObject go = Instantiate(blankRoomPrefab, new Vector3(x,y,0), Quaternion.identity) as GameObject;
-
+                go.transform.parent = this.transform;
             }
         }
 	}

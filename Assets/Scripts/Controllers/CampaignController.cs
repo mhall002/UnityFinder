@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CampaignScript : MonoBehaviour {
-
-    public int CurrentRoom;
+public class CampaignController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
