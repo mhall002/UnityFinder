@@ -15,9 +15,6 @@ namespace Assets.Scripts.Models
 
         bool Visible;
 
-        public static Ground NormalTerrain;
-        public static Ground BlockedTerrain;
-
         public Ground[,] TerrainGrid;
         public Entity[,] EntityGrid;
 

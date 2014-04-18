@@ -8,6 +8,9 @@ public class Tile : MonoBehaviour {
     SpriteStorage SpriteStorage;
     RoomEditor RoomEditor;
     SpriteRenderer Renderer;
+    RoomController RoomController;
+    public int X;
+    public int Y;
 
     public Ground Terrain
     {
@@ -33,6 +36,7 @@ public class Tile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         RoomEditor = (RoomEditor)GameObject.Find("RoomEditor").GetComponent("RoomEditor");
+        RoomController = (RoomController)GameObject.Find("RoomController").GetComponent("RoomController");
         if (Renderer == null)
             Renderer = (GetComponent("SpriteRenderer") as SpriteRenderer);
 	}
@@ -47,6 +51,7 @@ public class Tile : MonoBehaviour {
             {
                 this.terrain = RoomEditor.SelectedTerrain;
                 TerrainChanged();
+                RoomController.SetTerrain(X, Y, this.terrain);
             }
             else
             {
@@ -68,6 +73,8 @@ public class Tile : MonoBehaviour {
         {
             this.terrain = RoomEditor.SelectedTerrain;
             TerrainChanged();
+            RoomController.SetTerrain(X, Y, this.terrain);
+            Debug.Log("Setting to " + this.terrain.Name);
         }
     }
 

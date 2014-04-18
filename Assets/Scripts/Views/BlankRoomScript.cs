@@ -37,8 +37,6 @@ public class BlankRoomScript : MonoBehaviour {
             SpriteStorage = (SpriteStorage)GameObject.Find("SpriteStorage").GetComponent("SpriteStorage");
         }
         if (room != null)
-            Debug.Log("Changing room - " + room.RoomID);
-        if (room != null)
         {
             (GetComponent("SpriteRenderer") as SpriteRenderer).sprite = SpriteStorage.GetSprite("Campaign/PopulatedRoom");
         }

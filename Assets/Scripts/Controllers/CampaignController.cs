@@ -72,6 +72,7 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Campaign.Rooms[gridY, gridX] = room;
         ActiveRoom = room;
         OnPropertyChanged("Rooms[" + gridY + "," + gridX + "]");
+        Debug.Log("Creating new room");
     }
 
     public void SetRoom(int gridX, int gridY)

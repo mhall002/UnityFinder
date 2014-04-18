@@ -7,6 +7,7 @@ public class TileGrid : MonoBehaviour {
     public Room Room;
     public RoomController RoomController;
     public GameObject Tile;
+    public Tile[,] Tiles;
 
 	// Use this for initialization
 	void Start () {
@@ -28,19 +29,39 @@ public class TileGrid : MonoBehaviour {
     {
         Debug.Log("Loading level");
         Room = RoomController.Room;
+        Debug.Log("Room: " + Room.RoomID);
         if (Room != null)
         {
-            float x = -10.2f;
-            float y = -4.6f;
-            for (int gridx = 0; gridx < Room.Width; gridx += 1)
+            if (Tiles == null)
             {
-                x = -9.5f + gridx * 0.75f;
-                for (int gridy = 0; gridy < Room.Height; gridy += 1)
+                Tiles = new Tile[Room.Height, Room.Width];
+                Debug.Log("Recreating tiles");
+                float x = -10.2f;
+                float y = -4.6f;
+                for (int gridx = 0; gridx < Room.Width; gridx += 1)
                 {
-                    y = -4.2f + gridy * 0.75f;
-                    Tile go = (Instantiate(Tile, new Vector3(x, y, 0), Quaternion.identity) as GameObject).GetComponent("Tile") as Tile;
-                    go.transform.parent = this.transform;
-                    go.Terrain = Room.TerrainGrid[gridy, gridx];
+                    x = -9.5f + gridx * 0.75f;
+                    for (int gridy = 0; gridy < Room.Height; gridy += 1)
+                    {
+                        y = -4.2f + gridy * 0.75f;
+                        Tile go = (Instantiate(Tile, new Vector3(x, y, 0), Quaternion.identity) as GameObject).GetComponent("Tile") as Tile;
+                        go.transform.parent = this.transform;
+                        go.Terrain = Room.TerrainGrid[gridy, gridx];
+                        go.X = gridx;
+                        go.Y = gridy;
+                        Tiles[gridy, gridx] = go;
+                    }
+                }
+            }
+            else
+            {
+                for (int gridx = 0; gridx < Room.Width; gridx += 1)
+                {
+                    for (int gridy = 0; gridy < Room.Height; gridy += 1)
+                    {
+                        Tile go = Tiles[gridy, gridx];
+                        go.Terrain = Room.TerrainGrid[gridy, gridx];
+                    }
                 }
             }
         }

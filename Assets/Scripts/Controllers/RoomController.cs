@@ -27,6 +27,13 @@ public class RoomController : MonoBehaviour, INotifyPropertyChanged {
             Debug.Log("Sent room");
         }
     }
+
+    public void SetTerrain(int x, int y, Ground terrain)
+    {
+        Room.TerrainGrid[y, x] = terrain;
+        Debug.Log("Terrain at "+ x + "," + y + " = " + Room.TerrainGrid[y, x].Name);
+        Room.RoomID = 7;
+    }
 	
 	// Update is called once per frame
 	void Update () {

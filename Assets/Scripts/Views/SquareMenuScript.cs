@@ -35,6 +35,7 @@ public class SquareMenuScript : MonoBehaviour {
                 if (GUI.Button(new Rect(Position.x + 10, Position.y + 10, Width - 20, 30), "View/Edit"))
                 {
                     CampaignController.SetRoom(GridX, GridY);
+                    Debug.Log("Set room to " + GridX + " : " + GridY);
                     ViewController.State = global::ViewController.ViewState.Room;
                 }
                 if (GUI.Button(new Rect(Position.x + 10, Position.y + 50, Width - 20, 30), "Delete"))
@@ -57,14 +58,12 @@ public class SquareMenuScript : MonoBehaviour {
         {
             Height = 80;
         }
-        Debug.Log(Position.y);
         Position.y = Screen.height - Position.y;
         Position.x += 20;
         Debug.Log(Position.y);
         this.GridX = GridX;
         this.GridY = GridY;
         this.Position = Position;
-        Debug.Log(this.Position.x);
         Displayed = true;
         MouseDown = true;
         Rect = new Rect(this.Position.x, this.Position.y, Width, Height);
