@@ -11,11 +11,19 @@ Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Manage
 Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\UnityEngine.dll into Unity Child Domain
 Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Assembly-CSharp.dll (this message is harmless)
 Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-- Completed reload, in  0.039 seconds
+- Completed reload, in  0.043 seconds
 desktop: 1920x1080 60Hz; virtual: 3600x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\System.dll (this message is harmless)
+Creating Grid
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+17 x 9
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
 False
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
@@ -28,51 +36,23 @@ False
  
 (Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
 
-17 x 9
+RPC call failed because the function 'ClearTerrain' does not exist in the any script attached to'NetworkView'
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 167)
 
-544
+RPC call failed because the function 'AddTerrain' does not exist in the any script attached to'NetworkView'
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 167)
 
-256
+RPC call failed because the function 'AddTerrain' does not exist in the any script attached to'NetworkView'
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 167)
 
-468
+RPC call failed because the function 'TerrainComplete' does not exist in the any script attached to'NetworkView'
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 167)
 
-
+RPC call failed because the function 'CreateCampaign' does not exist in the any script attached to'NetworkView'
  
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Changing room - 0
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-False
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Campaign/PopulatedRoom
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-False
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-544
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-256
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-468
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+(Filename:  Line: 167)
 

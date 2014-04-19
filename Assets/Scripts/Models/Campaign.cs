@@ -34,6 +34,9 @@ namespace Assets.Scripts.Models
 
     public class Campaign
     {
+        public static int Width = 17;
+        public static int Height = 9;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private string name;

@@ -4,8 +4,10 @@ using Assets.Scripts.Models;
 using System.Collections.Generic;
 
 public class TerrainStorage : MonoBehaviour {
-
+    public SessionManager SessionManager;
+    public NetworkController NetworkController;
     Dictionary<string, Ground> Terrains = new Dictionary<string, Ground>();
+    Dictionary<char, Ground> CTerrains = new Dictionary<char, Ground>();
     bool Loaded = false;
 
 	// Use this for initialization
@@ -16,29 +18,43 @@ public class TerrainStorage : MonoBehaviour {
     // Populate from DB, for now just hard coded
     void LoadTerrains()
     {
-        Ground NormalTerrain = new Ground()
+        if (!SessionManager.IsClient)
         {
-            Name = "Normal Tile",
-            TypeID = 1,
-            TextureFile = "Tiles/NormalTile",
-            States = new List<State>()
-        };
-        Terrains.Add("Normal", NormalTerrain);
+            Ground NormalTerrain = new Ground()
+            {
+                Name = "Normal",
+                TypeID = 1,
+                TextureFile = "Tiles/NormalTile",
+                States = new List<State>(),
+                CharacterCode = 'a'
+            };
+            Terrains.Add("Normal", NormalTerrain);
+            CTerrains.Add('a', NormalTerrain);
 
-        Ground BlockedTerrain = new Ground()
-        {
-            Name = "Inaccessible Tile",
-            TypeID = 1,
-            TextureFile = "Tiles/BlackTile",
-            States = new List<State>()
-        };
-        BlockedTerrain.States.Add(new State()
-        {
-            Name = "Inaccessible",
-            Description = "You cannot move here"
-        });
-        Terrains.Add("Inaccessible", BlockedTerrain);
+            Ground BlockedTerrain = new Ground()
+            {
+                Name = "Inaccessible",
+                TypeID = 1,
+                TextureFile = "Tiles/BlackTile",
+                States = new List<State>(),
+                CharacterCode = 'b'
+            };
+            BlockedTerrain.States.Add(new State()
+            {
+                Name = "Inaccessible",
+                Description = "You cannot move here"
+            });
+            Terrains.Add("Inaccessible", BlockedTerrain);
+            CTerrains.Add('b', NormalTerrain);
+        }
 
+        Loaded = true;
+    }
+
+    public void AddTerrain(Ground terrain)
+    {
+        Terrains.Add(terrain.Name, terrain);
+        CTerrains.Add(terrain.CharacterCode, terrain);
         Loaded = true;
     }
 
@@ -58,6 +74,15 @@ public class TerrainStorage : MonoBehaviour {
             LoadTerrains();
         }
         return Terrains[name];
+    }
+
+    public Ground GetTerrain(char code)
+    {
+        if (!Loaded)
+        {
+            LoadTerrains();
+        }
+        return CTerrains[code];
     }
 
 	// Update is called once per frame

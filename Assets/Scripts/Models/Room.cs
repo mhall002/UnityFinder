@@ -98,6 +98,16 @@ namespace Assets.Scripts.Models
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
+
+        public string GetTerrainString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (Ground terrain in TerrainGrid)
+            {
+                stringBuilder.Append(terrain.CharacterCode);
+            }
+            return stringBuilder.ToString();
+        }
     }
 
 }

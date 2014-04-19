@@ -59,11 +59,14 @@ public class CampaignGrid : MonoBehaviour {
 
     void ResetGrid()
     {
-        for (int x = 0; x < 17; x++)
+        if (Campaign != null)
         {
-            for (int y = 0; y < 9; y++)
+            for (int x = 0; x < 17; x++)
             {
-                RoomSquares[x,y].Room = Campaign.GetRoom(x, y);
+                for (int y = 0; y < 9; y++)
+                {
+                    RoomSquares[x, y].Room = Campaign.GetRoom(x, y);
+                }
             }
         }
     }

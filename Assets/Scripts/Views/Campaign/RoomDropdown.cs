@@ -4,6 +4,7 @@ using Assets.Scripts.Models;
 
 public class RoomDropdown : MonoBehaviour {
 
+    public SessionManager SessionManager;
     public CampaignController CampaignController;
     public ViewController ViewController;
 
@@ -22,35 +23,38 @@ public class RoomDropdown : MonoBehaviour {
 	
     void OnGUI()
     {
-        Room room = CampaignController.Campaign.GetRoom(GridX, GridY);
-        if (Displayed)
+        if (!SessionManager.IsClient)
         {
-            GUILayout.BeginArea(Rect);
-            if (!Exists)
+            Room room = CampaignController.Campaign.GetRoom(GridX, GridY);
+            if (Displayed)
             {
-                if (GUILayout.Button("Create"))
+                GUILayout.BeginArea(Rect);
+                if (!Exists)
                 {
-                    CampaignController.CreateRoom(GridX, GridY);
+                    if (GUILayout.Button("Create"))
+                    {
+                        CampaignController.CreateRoom(GridX, GridY);
+                    }
                 }
+                else
+                {
+                    if (GUILayout.Button("View/Edit"))
+                    {
+                        CampaignController.SetRoom(GridX, GridY);
+                        Debug.Log("Set room to " + GridX + " : " + GridY);
+                        ViewController.State = global::ViewController.ViewState.Room;
+                    }
+                    if (GUILayout.Button(room.Visible ? "Hide" : "Show"))
+                    {
+                        CampaignController.SetVisible(GridX, GridY, !room.Visible);
+                    }
+                    if (GUILayout.Button("Delete"))
+                    {
+                        CampaignController.DeleteRoom(GridX, GridY);
+                    }
+                }
+                GUILayout.EndArea();
             }
-            else
-            {
-                if (GUILayout.Button("View/Edit"))
-                {
-                    CampaignController.SetRoom(GridX, GridY);
-                    Debug.Log("Set room to " + GridX + " : " + GridY);
-                    ViewController.State = global::ViewController.ViewState.Room;
-                }
-                if (GUILayout.Button(room.Visible ? "Hide" : "Show"))
-                {
-                    CampaignController.SetVisible(GridX, GridY, !room.Visible);
-                }
-                if (GUILayout.Button("Delete"))
-                {
-                    CampaignController.DeleteRoom(GridX, GridY);
-                }
-            }
-            GUILayout.EndArea();
         }
     }
 

@@ -11,5 +11,6 @@ namespace Assets.Scripts.Models
         public int TypeID;
         public List<State> States;
         public string TextureFile;
+        public char CharacterCode;
     }
 }

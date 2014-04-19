@@ -6,6 +6,15 @@ using System.Collections.Generic;
 public class SessionManager : MonoBehaviour {
    // public List<Player> Players;
 	// Use this for initialization
+
+    public RemoteView RemoteView;
+    public NetworkController NetworkController;
+
+    public bool IsClient
+    {
+        get { return Network.isClient; }
+    }
+
 	void Start () {
         DontDestroyOnLoad(this);
 	}
@@ -14,6 +23,8 @@ public class SessionManager : MonoBehaviour {
     {
         Network.InitializeServer(32, 25001, !Network.HavePublicAddress());
         MasterServer.RegisterHost("mhall002UnityFinder", "Game 1");
+        RemoteView.gameObject.SetActive(true);
+        RemoteView.Initiate();
     }
 
     public void StartServerLookup()
@@ -47,7 +58,8 @@ public class SessionManager : MonoBehaviour {
 
     public void Connect(int i)
     {
-
+        Network.Connect(hostData[i]);
+        NetworkController.gameObject.SetActive(true);
     }
 
 	// Update is called once per frame
