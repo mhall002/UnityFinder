@@ -35,7 +35,9 @@ public class Tile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        RoomEditor = (RoomEditor)GameObject.Find("RoomEditor").GetComponent("RoomEditor");
+        GameObject go = GameObject.Find("RoomEditor") as GameObject;
+        if (go != null)
+            RoomEditor = (RoomEditor)GameObject.Find("RoomEditor").GetComponent("RoomEditor");
         RoomController = (RoomController)GameObject.Find("RoomController").GetComponent("RoomController");
         if (Renderer == null)
             Renderer = (GetComponent("SpriteRenderer") as SpriteRenderer);
@@ -45,7 +47,7 @@ public class Tile : MonoBehaviour {
 
     void OnMouseEnter()
     {
-        if (RoomEditor.SelectedTerrain != null)
+        if (RoomEditor != null && RoomEditor.SelectedTerrain != null)
         {
             if (Input.GetMouseButton(0))
             {
@@ -64,12 +66,13 @@ public class Tile : MonoBehaviour {
 
     void OnMouseExit()
     {
-        Renderer.sprite = SpriteStorage.GetSprite(Terrain.TextureFile);
+        if (RoomEditor != null)
+            Renderer.sprite = SpriteStorage.GetSprite(Terrain.TextureFile);
     }
 
     void OnMouseDown()
     {
-        if (RoomEditor.SelectedTerrain != null)
+        if (RoomEditor != null && RoomEditor.SelectedTerrain != null)
         {
             this.terrain = RoomEditor.SelectedTerrain;
             TerrainChanged();
@@ -80,7 +83,7 @@ public class Tile : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetMouseButtonDown(1))
+	    if (RoomEditor != null && Input.GetMouseButtonDown(1))
         {
             Renderer.sprite = SpriteStorage.GetSprite(Terrain.TextureFile);
         }

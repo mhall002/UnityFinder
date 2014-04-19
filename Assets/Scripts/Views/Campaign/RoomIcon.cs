@@ -6,6 +6,7 @@ public class RoomIcon : MonoBehaviour {
 
     private Room room;
     public SpriteStorage SpriteStorage;
+    public SessionManager SessionManager;
 
     public Room Room
     {
@@ -33,6 +34,7 @@ public class RoomIcon : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Menu = (RoomDropdown) GameObject.Find("SquareMenu").GetComponent("RoomDropdown");
+        SessionManager = GameObject.Find("SessionManager").GetComponent("SessionManager") as SessionManager;
 	}
 
     void OnMouseDown() {
@@ -42,6 +44,7 @@ public class RoomIcon : MonoBehaviour {
 
     void RoomChanged()
     {
+        
         if (SpriteStorage == null)
         {
             SpriteStorage = (SpriteStorage)GameObject.Find("SpriteStorage").GetComponent("SpriteStorage");
@@ -54,7 +57,7 @@ public class RoomIcon : MonoBehaviour {
         {
             (GetComponent("SpriteRenderer") as SpriteRenderer).sprite = SpriteStorage.GetSprite("Campaign/BlankRoom");
         }
-        if (room == null)
+        if (room == null || SessionManager.IsClient)
         {
             transform.Find("InvisibleRoom").renderer.enabled = false;
             transform.Find("VisibleRoom").renderer.enabled = false;

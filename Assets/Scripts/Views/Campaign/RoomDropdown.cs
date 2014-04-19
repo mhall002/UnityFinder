@@ -23,11 +23,12 @@ public class RoomDropdown : MonoBehaviour {
 	
     void OnGUI()
     {
-        if (!SessionManager.IsClient)
+        if (Displayed)
         {
-            Room room = CampaignController.Campaign.GetRoom(GridX, GridY);
-            if (Displayed)
+            if (!SessionManager.IsClient)
             {
+                Room room = CampaignController.Campaign.GetRoom(GridX, GridY);
+
                 GUILayout.BeginArea(Rect);
                 if (!Exists)
                 {
@@ -55,17 +56,18 @@ public class RoomDropdown : MonoBehaviour {
                 }
                 GUILayout.EndArea();
             }
-        }
-        else
-        {
-            GUILayout.BeginArea(Rect);
-            if (GUILayout.Button("View"))
+
+            else if (Exists)
             {
-                CampaignController.SetRoom(GridX, GridY);
-                Debug.Log("Set room to " + GridX + " : " + GridY);
-                ViewController.State = global::ViewController.ViewState.Room;
+                GUILayout.BeginArea(Rect);
+                if (GUILayout.Button("View"))
+                {
+                    CampaignController.SetRoom(GridX, GridY);
+                    Debug.Log("Set room to " + GridX + " : " + GridY);
+                    ViewController.State = global::ViewController.ViewState.Room;
+                }
+                GUILayout.EndArea();
             }
-            GUILayout.EndArea();
         }
     }
 
