@@ -41,6 +41,26 @@ public class RemoteView : MonoBehaviour {
             RoomToLocation[room] = new Pair<int, int>(x, y);
             Debug.Log(sender.ToString());
         }
+        if (e.PropertyName.StartsWith("AddLink"))
+        {
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(',');
+            int x1 = int.Parse(indexes[0]);
+            int y1 = int.Parse(indexes[1]);
+            int x2 = int.Parse(indexes[3]);
+            int y2 = int.Parse(indexes[4].Substring(0, indexes[1].IndexOf(']')));
+            AddLink(x1, y1, x2, y2);
+        }
+        if (e.PropertyName.StartsWith("RemoveLink"))
+        {
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(',');
+            int x1 = int.Parse(indexes[0]);
+            int y1 = int.Parse(indexes[1]);
+            int x2 = int.Parse(indexes[3]);
+            int y2 = int.Parse(indexes[4].Substring(0, indexes[1].IndexOf(']')));
+            RemoveLink(x1, y1, x2, y2);
+        }
 
     }
 
@@ -95,6 +115,7 @@ public class RemoteView : MonoBehaviour {
         {
             NetworkController.networkView.RPC("CreateCampaign", RPCMode.OthersBuffered, Campaign.Name);
             SendRooms();
+            SendLinks();
             Debug.Log("Sent Campaign!");
         }
     }
@@ -138,11 +159,30 @@ public class RemoteView : MonoBehaviour {
         {
             NetworkController.networkView.RPC("CreateRoom", RPCMode.OthersBuffered, x, y, room.GetTerrainString());
             SetRoomXPWorth(x, y, room.XPWorth);
+            Debug.Log("Sending Room");
         }
         else
         {
             DeleteRoom(x, y);
         }
+    }
+
+    void SendLinks()
+    {
+        foreach (Pair<Pair<int, int>, Pair<int, int>> pair in Campaign.GetLinks())
+        {
+            AddLink(pair.First.First, pair.First.Second, pair.Second.First, pair.Second.Second);
+        }
+    }
+
+    void AddLink(int x1, int y1, int x2, int y2)
+    {
+        NetworkController.networkView.RPC("AddLink", RPCMode.OthersBuffered, x1, y1, x2, y2);
+    }
+
+    void RemoveLink(int x1, int y1, int x2, int y2)
+    {
+        NetworkController.networkView.RPC("RemoveLink", RPCMode.OthersBuffered, x1, y1, x2, y2);
     }
 
     void DeleteRoom(int x, int y)

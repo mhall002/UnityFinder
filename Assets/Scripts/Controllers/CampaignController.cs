@@ -112,4 +112,14 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     {
         Campaign.GetRoom(x, y).Visible = visible;
     }
+
+    public void RemoveLink(Pair<int, int> room1, Pair<int, int> room2)
+    {
+        Campaign.AddLink(room1, room2);
+    }
+
+    public void CreateLink(Pair<int,int> room1, Pair<int,int> room2)
+    {
+        Campaign.AddLink(room1, room2);
+    }
 }

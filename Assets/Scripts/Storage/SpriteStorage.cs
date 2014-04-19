@@ -17,10 +17,7 @@ public class SpriteStorage : MonoBehaviour {
         if (!Sprites.ContainsKey(path))
         {
             var obj = Resources.Load<Sprite>("Sprites/" + path);
-            Debug.Log(obj == null);
             Sprites[path] = Resources.Load<Sprite>("Sprites/" + path);
-            Debug.Log(path);
-            Debug.Log(Sprites[path] == null);
         }
         return Sprites[path];
     }
@@ -30,10 +27,7 @@ public class SpriteStorage : MonoBehaviour {
         if (!Textures.ContainsKey(path))
         {
             var obj = Resources.Load<Texture>("Sprites/" + path);
-            Debug.Log(obj == null);
             Textures[path] = Resources.Load<Texture>("Sprites/" + path);
-            Debug.Log(path);
-            Debug.Log(Sprites[path] == null);
         }
         return Textures[path];
     }

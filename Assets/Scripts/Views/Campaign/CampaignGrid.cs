@@ -5,7 +5,10 @@ using Assets.Scripts.Models;
 public class CampaignGrid : MonoBehaviour {
 
     public GameObject blankRoomPrefab;
+    public GameObject connectorPrefab;
     public CampaignController CampaignController;
+    public RoomConnector[,] RoomConnectionsRight;
+    public RoomConnector[,] RoomConnectionsUp;
 
     Campaign campaign;
     Campaign Campaign
@@ -34,6 +37,8 @@ public class CampaignGrid : MonoBehaviour {
         //Creates the grid of Add Room
         Debug.Log("Creating Grid");
         RoomSquares = new RoomIcon[17, 9];
+        RoomConnectionsRight = new RoomConnector[16, 9];
+        RoomConnectionsUp = new RoomConnector[17, 8];
         float spacing = 1.0f;
         int xCounter = 0;
         int yCounter = 0;
@@ -51,6 +56,22 @@ public class CampaignGrid : MonoBehaviour {
             }
             xCounter++;
         }
+        for (int x = 0; x < Campaign.Width; x++)
+        {
+            for (int y = 0; y < Campaign.Height; y++)
+            {
+                if (x < Campaign.Width - 1)
+                {
+                    RoomConnectionsRight[x, y] = (Instantiate(connectorPrefab, new Vector3(x*spacing - 9.5f + 0.5f, y*spacing - 4.2f, 0), Quaternion.identity) as GameObject).GetComponent("RoomConnector") as RoomConnector;
+                    RoomConnectionsRight[x, y].Setup(x, y, x + 1, y);
+                }
+                if (y < Campaign.Height - 1)
+                {
+                    RoomConnectionsUp[x, y] = (Instantiate(connectorPrefab, new Vector3(x * spacing - 9.5f, y * spacing - 4.2f + 0.5f, 0), Quaternion.identity) as GameObject).GetComponent("RoomConnector") as RoomConnector;
+                    RoomConnectionsUp[x, y].Setup(x, y, x, y + 1);
+                }
+            }
+        }
         Debug.Log(xCounter + " x " + yCounter);
 
         CampaignController.PropertyChanged += CampaignController_PropertyChanged;
@@ -66,6 +87,32 @@ public class CampaignGrid : MonoBehaviour {
                 for (int y = 0; y < 9; y++)
                 {
                     RoomSquares[x, y].Room = Campaign.GetRoom(x, y);
+                    if (x < Campaign.Width - 1)
+                    {
+                        if (Campaign.GetRoom(x,y) != null && Campaign.GetRoom(x+1,y) != null)
+                        {
+                            RoomConnectionsRight[x, y].gameObject.SetActive(true);
+                            Debug.Log("Active Right " + x + " " + y);
+                            RoomConnectionsRight[x, y].Enabled = Campaign.HasLink(new Pair<int, int>(x, y), new Pair<int, int>(x + 1, y));
+                        }
+                        else
+                        {
+                            RoomConnectionsRight[x, y].gameObject.SetActive(false);
+                        }
+                    }
+                    if (y < Campaign.Height - 1)
+                    {
+                        if (Campaign.GetRoom(x, y) != null && Campaign.GetRoom(x, y + 1) != null)
+                        {
+                            RoomConnectionsUp[x, y].gameObject.SetActive(true);
+                            Debug.Log("Active Up " + x + " " + y);
+                            RoomConnectionsUp[x, y].Enabled = Campaign.HasLink(new Pair<int, int>(x, y), new Pair<int, int>(x, y + 1));
+                        }
+                        else
+                        {
+                            RoomConnectionsUp[x, y].gameObject.SetActive(false);
+                        }
+                    }
                 }
             }
         }
@@ -81,7 +128,12 @@ public class CampaignGrid : MonoBehaviour {
             int x = int.Parse(indexes[0]);
             int y = int.Parse(indexes[1].Substring(0, indexes[1].IndexOf(']')));
             RoomSquares[x, y].Room = Campaign.GetRoom(x, y);
-            Debug.Log(sender.ToString());
+            ResetGrid();
+        }
+        if (e.PropertyName.StartsWith("AddLink") || e.PropertyName.StartsWith("RemoveLink"))
+        {
+            ResetGrid();
+            Debug.Log("Reset the grid");
         }
     }
 

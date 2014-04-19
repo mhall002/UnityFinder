@@ -54,7 +54,7 @@ namespace Assets.Scripts.Models
         }
 
         public List<Character> Characters;
-        private List<Pair<int, int>> RoomLinks;
+        private List<Pair<Pair<int, int>, Pair<int, int>>> RoomLinks = new List<Pair<Pair<int, int>, Pair<int, int>>>();
         private Room[,] Rooms; // 17 * 9
 
         private Room activeRoom;
@@ -83,28 +83,33 @@ namespace Assets.Scripts.Models
             OnPropertyChanged("Characters");
         }
 
-        public bool HasLink(int room1, int room2)
+        public bool HasLink(Pair<int, int> room1, Pair<int, int> room2)
         {
-            foreach (Pair<int, int> connection in RoomLinks)
+            foreach (Pair<Pair<int, int>, Pair<int, int>> connection in RoomLinks)
             {
-                int first = connection.First;
-                int second = connection.Second;
-                if ((first == room1 && second == room2) || (first == room2 && second == room1))
+                Pair<int, int> first = connection.First;
+                Pair<int, int> second = connection.Second;
+                if ((first.Equals(room1) && second.Equals(room2)) || (first.Equals(room2) && second.Equals(room1)))
                     return true;
             }
             return false;
         }
 
-        public void AddLink(int room1, int room2)
+        public void AddLink(Pair<int, int> room1, Pair<int, int> room2)
         {
-            RoomLinks.Add(new Pair<int, int>(room1, room2));
-            OnPropertyChanged("RoomLinks");
+            RoomLinks.Add(new Pair<Pair<int, int>, Pair<int, int>>(room1, room2));
+            OnPropertyChanged("AddLink["+room1.First +","+room1.Second+","+room2.First+","+room2.Second+"]");
         }
 
-        public void RemoveLink(int room1, int room2)
+        public void RemoveLink(Pair<int, int> room1, Pair<int, int> room2)
         {
-            RoomLinks.Remove(new Pair<int, int>(room1, room2));
-            OnPropertyChanged("RoomLinks");
+            RoomLinks.Remove(new Pair<Pair<int, int>, Pair<int, int>>(room1, room2));
+            OnPropertyChanged("RemoveLink[" + room1.First + "," + room1.Second + "," + room2.First + "," + room2.Second + "]");
+        }
+
+        public IEnumerable<Pair<Pair<int, int>, Pair<int, int>>> GetLinks()
+        {
+            return RoomLinks;
         }
 
         public Room GetRoom(int x, int y)

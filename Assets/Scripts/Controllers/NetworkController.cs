@@ -40,12 +40,25 @@ public class NetworkController : MonoBehaviour {
         Room room = new Room();
         SetTerrain(room, terrain);
         Campaign.SetRoom(x, y, room);
+        Debug.Log("Received Room");
     }
 
     [RPC]
     void DeleteRoom(int x, int y)
     {
         Campaign.SetRoom(x, y, null);
+    }
+
+    [RPC]
+    void AddLink(int x1, int y1, int x2, int y2)
+    {
+        Campaign.AddLink(new Pair<int, int>(x1, y1), new Pair<int, int>(x2, y2));
+    }
+
+    [RPC]
+    void RemoveLink(int x1, int y1, int x2, int y2)
+    {
+        Campaign.RemoveLink(new Pair<int, int>(x1, y1), new Pair<int, int>(x2, y2));
     }
 
     [RPC]
