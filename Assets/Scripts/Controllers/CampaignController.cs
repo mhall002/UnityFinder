@@ -7,19 +7,24 @@ using System;
 public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
 
     public TerrainStorage TerrainStorage;
-    public Campaign Campaign;
-    private Room activeRoom;
-    private Ground NormalTerrain;
-    private Ground BlockedTerrain;
-    public Room ActiveRoom
+
+    private Campaign campaign;
+    public Campaign Campaign
     {
-        get { return activeRoom; }
-        set 
-        { 
-            activeRoom = value;
-            OnPropertyChanged("ActiveRoom");
+        get
+        {
+            return campaign;
+        }
+        set
+        {
+            campaign = value;
+            OnPropertyChanged("Campaign");
         }
     }
+
+    private Ground NormalTerrain;
+    private Ground BlockedTerrain;
+
     public event PropertyChangedEventHandler PropertyChanged;
 
 	// Use this for initialization
@@ -51,15 +56,15 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
             {
                 if ((y >= Room.Height - 2 || y <= 1) && Math.Abs(x - Room.Width / 2) > 1)
                 {
-                    room.TerrainGrid[y, x] = BlockedTerrain;
+                    room.SetTerrain(x,y,BlockedTerrain);
                 }
                 else if ((x >= Room.Width - 2 || x <= 1) && Math.Abs(y - Room.Height / 2) > 1)
                 {
-                    room.TerrainGrid[y, x] = BlockedTerrain;
+                    room.SetTerrain(x,y,BlockedTerrain);
                 }
                 else
                 {
-                    room.TerrainGrid[y, x] = NormalTerrain;
+                    room.SetTerrain(x,y,NormalTerrain);
                 }
             }
         }
@@ -69,26 +74,24 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public void CreateRoom (int gridX, int gridY)
     {
         Room room = InitializeRoom();
-        Campaign.Rooms[gridY, gridX] = room;
-        ActiveRoom = room;
-        OnPropertyChanged("Rooms[" + gridY + "," + gridX + "]");
+        Campaign.SetRoom(gridX, gridY, room);
+        Campaign.ActiveRoom = room;
         Debug.Log("Creating new room");
     }
 
     public void SetRoom(int gridX, int gridY)
     {
-        Room room = Campaign.Rooms[gridY, gridX];
-        ActiveRoom = room;
+        Room room = Campaign.GetRoom(gridX, gridY);
+        Campaign.ActiveRoom = room;
     }
 
     public void DeleteRoom (int gridX, int gridY)
     {
-        if (ActiveRoom == Campaign.Rooms[gridY, gridX])
+        if (Campaign.ActiveRoom == Campaign.GetRoom(gridX, gridY))
         {
-            activeRoom = null;
+            Campaign.ActiveRoom = null;
         }
-        Campaign.Rooms[gridY, gridX] = null;
-        OnPropertyChanged("Rooms[" + gridY + "," + gridX + "]");
+        Campaign.SetRoom(gridX, gridY, null);
     }
 
 	// Update is called once per frame
@@ -103,5 +106,10 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         {
             handler(this, new PropertyChangedEventArgs(name));
         }
+    }
+
+    public void SetVisible(int x, int y, bool visible)
+    {
+        Campaign.GetRoom(x, y).Visible = visible;
     }
 }

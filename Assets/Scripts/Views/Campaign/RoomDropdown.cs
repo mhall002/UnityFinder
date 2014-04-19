@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets.Scripts.Models;
 
-public class SquareMenuScript : MonoBehaviour {
+public class RoomDropdown : MonoBehaviour {
 
     public CampaignController CampaignController;
     public ViewController ViewController;
+
     public bool Displayed = false;
     public Vector2 Position;
     public Rect Rect;
@@ -20,36 +22,42 @@ public class SquareMenuScript : MonoBehaviour {
 	
     void OnGUI()
     {
+        Room room = CampaignController.Campaign.GetRoom(GridX, GridY);
         if (Displayed)
         {
-            GUI.Box(Rect, "");
+            GUILayout.BeginArea(Rect);
             if (!Exists)
             {
-                if (GUI.Button(new Rect(Position.x + 10, Position.y + 10, Width - 20, 30), "Create"))
+                if (GUILayout.Button("Create"))
                 {
                     CampaignController.CreateRoom(GridX, GridY);
                 }
             }
             else
             {
-                if (GUI.Button(new Rect(Position.x + 10, Position.y + 10, Width - 20, 30), "View/Edit"))
+                if (GUILayout.Button("View/Edit"))
                 {
                     CampaignController.SetRoom(GridX, GridY);
                     Debug.Log("Set room to " + GridX + " : " + GridY);
                     ViewController.State = global::ViewController.ViewState.Room;
                 }
-                if (GUI.Button(new Rect(Position.x + 10, Position.y + 50, Width - 20, 30), "Delete"))
+                if (GUILayout.Button(room.Visible ? "Hide" : "Show"))
+                {
+                    CampaignController.SetVisible(GridX, GridY, !room.Visible);
+                }
+                if (GUILayout.Button("Delete"))
                 {
                     CampaignController.DeleteRoom(GridX, GridY);
                 }
             }
+            GUILayout.EndArea();
         }
     }
 
     bool Exists = false;
     public void ShowMenu(int GridX, int GridY, Vector2 Position)
     {
-        Exists = CampaignController.Campaign.Rooms[GridY, GridX] != null;
+        Exists = CampaignController.Campaign.GetRoom(GridX, GridY) != null;
         if (!Exists)
         {
             Height = 50;

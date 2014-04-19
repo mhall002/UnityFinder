@@ -4,7 +4,25 @@ using Assets.Scripts.Models;
 
 public class TileGrid : MonoBehaviour {
 
-    public Room Room;
+    private Room room;
+    public Room Room
+    {
+        get
+        {
+            return room;
+        }
+        set
+        {
+            if (room != null)
+                room.PropertyChanged -= room_PropertyChanged;
+            room = value;
+            if (room != null)
+                room.PropertyChanged += room_PropertyChanged;
+            LoadLevel();
+        }
+    }
+
+    
     public RoomController RoomController;
     public GameObject Tile;
     public Tile[,] Tiles;
@@ -12,30 +30,32 @@ public class TileGrid : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         RoomController.PropertyChanged += RoomController_PropertyChanged;
+        Room = RoomController.Room;
         Debug.Log("Started --------------");
         LoadLevel();
 	}
+
+    void room_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) // TODO improve efficiency
+    {
+        LoadLevel();
+    }
 
     void RoomController_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         Debug.Log(e.PropertyName);
         if (e.PropertyName == "Room")
         {
-            LoadLevel();
+            Room = RoomController.Room;
         }
     }
 
     public void LoadLevel()
     {
-        Debug.Log("Loading level");
-        Room = RoomController.Room;
-        Debug.Log("Room: " + Room.RoomID);
         if (Room != null)
         {
             if (Tiles == null)
             {
                 Tiles = new Tile[Room.Height, Room.Width];
-                Debug.Log("Recreating tiles");
                 float x = -10.2f;
                 float y = -4.6f;
                 for (int gridx = 0; gridx < Room.Width; gridx += 1)
@@ -46,7 +66,7 @@ public class TileGrid : MonoBehaviour {
                         y = -4.2f + gridy * 0.75f;
                         Tile go = (Instantiate(Tile, new Vector3(x, y, 0), Quaternion.identity) as GameObject).GetComponent("Tile") as Tile;
                         go.transform.parent = this.transform;
-                        go.Terrain = Room.TerrainGrid[gridy, gridx];
+                        go.Terrain = Room.GetTerrain(gridx, gridy);
                         go.X = gridx;
                         go.Y = gridy;
                         Tiles[gridy, gridx] = go;
@@ -60,10 +80,14 @@ public class TileGrid : MonoBehaviour {
                     for (int gridy = 0; gridy < Room.Height; gridy += 1)
                     {
                         Tile go = Tiles[gridy, gridx];
-                        go.Terrain = Room.TerrainGrid[gridy, gridx];
+                        go.Terrain = Room.GetTerrain(gridx, gridy);
                     }
                 }
             }
+        }
+        else
+        {
+            Debug.Log("Null Room");
         }
     }
 
