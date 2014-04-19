@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.Scripts.Storage.Database;
 
 public class CampaignEditorPanel : MonoBehaviour {
 
@@ -38,15 +37,7 @@ public class CampaignEditorPanel : MonoBehaviour {
             }
             if (GUI.Button(GetButtonRect(), "Save"))
             {
-                using(var db = new UnityFinderEntities()){
-                    var item = new Campaign()
-                    {
-                        Name = "TestName",
-                        Description = "TestDescription"
-                    };
-                    db.AddToCampaigns(item);
-                    db.SaveChanges();
-                }
+
             }
             if (GUI.Button(GetButtonRect(), "Load"))
             {
