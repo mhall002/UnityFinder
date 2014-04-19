@@ -21,7 +21,7 @@ public class CameraScript : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            translate.y -= 1 * Time.deltaTime;
+            translate.y -= 1 * Time.deltaTime; 
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
