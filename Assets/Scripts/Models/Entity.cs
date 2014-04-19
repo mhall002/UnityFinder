@@ -10,7 +10,7 @@ namespace Assets.Scripts.Models
         public string Name;
         public string Description;
         public string HiddenDescription;
-        public int ImageIdentifier;
+        public string ImageIdentifier;
         public int Height;
         public int Width;
         public EntityType Type;
