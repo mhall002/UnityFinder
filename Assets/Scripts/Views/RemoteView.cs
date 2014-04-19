@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Models;
+using System.Collections.Generic;
 
 public class RemoteView : MonoBehaviour {
     public CampaignController CampaignController;
     public TerrainStorage TerrainStorage;
+    public NetworkController NetworkController;
     private Campaign campaign;
+
     public Campaign Campaign
     {
         get { return campaign; }
@@ -16,13 +19,64 @@ public class RemoteView : MonoBehaviour {
             campaign = value;
             if (campaign != null)
                 campaign.PropertyChanged += campaign_PropertyChanged;
-            SendAll();
+            SendCampaign();
         }
     }
 
+    private Dictionary<Room, Pair<int, int>> RoomToLocation = new Dictionary<Room, Pair<int, int>>();
+
     void campaign_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        SendAll();
+        if (e.PropertyName.StartsWith("Rooms"))
+        {
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(',');
+            Debug.Log(indexes[1].Substring(0, indexes[1].IndexOf(']') - 1));
+            int x = int.Parse(indexes[0]);
+            int y = int.Parse(indexes[1].Substring(0, indexes[1].IndexOf(']')));
+            Room room = Campaign.GetRoom(x, y);
+            if (room != null && room.Visible)
+                SendRoom(x, y, room);
+            room.PropertyChanged += room_PropertyChanged;
+            RoomToLocation[room] = new Pair<int, int>(x, y);
+            Debug.Log(sender.ToString());
+        }
+
+    }
+
+    void room_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        Room room = (Room)sender;
+        Pair<int, int> location = RoomToLocation[(Room)sender];
+        int x = location.First;
+        int y = location.Second;
+        if (room.Visible)
+        {
+            if (e.PropertyName.StartsWith("Terrain["))
+            {
+                string property = e.PropertyName;
+                string[] indexes = property.Split('[')[1].Split(',');
+                int tx = int.Parse(indexes[0]);
+                int ty = int.Parse(indexes[1].Substring(0, indexes[1].IndexOf(']')));
+                SetTerrain(x, y, tx, ty, room.GetTerrain(tx, ty));
+            }
+            if (e.PropertyName == "XPWorth")
+            {
+                SetRoomXPWorth(x, y, room.XPWorth);
+            }
+        }
+        if (e.PropertyName == "Visible")
+        {
+            if (room.Visible)
+            {
+                SendRoom(x, y, room);
+            }
+            else
+            {
+                DeleteRoom(x, y);
+            }
+        }
+
     }
 
     void SendAll()
@@ -35,27 +89,29 @@ public class RemoteView : MonoBehaviour {
     {
         if (campaign == null)
         {
-            networkView.RPC("CreateCampaign", RPCMode.OthersBuffered);
+            NetworkController.networkView.RPC("DeleteCampaign", RPCMode.OthersBuffered);
         }
         else
         {
-            networkView.RPC("CreateCampaign", RPCMode.OthersBuffered, Campaign.Name);
+            NetworkController.networkView.RPC("CreateCampaign", RPCMode.OthersBuffered, Campaign.Name);
+            SendRooms();
+            Debug.Log("Sent Campaign!");
         }
     }
 
     void SendTerrains()
     {
-        networkView.RPC("ClearTerrain", RPCMode.OthersBuffered);
+        NetworkController.networkView.RPC("ClearTerrain", RPCMode.OthersBuffered);
         foreach (Ground terrain in TerrainStorage.GetTerrains())
         {
             SendTerrain(terrain);
         }
-        networkView.RPC("TerrainComplete", RPCMode.OthersBuffered);
+        NetworkController.networkView.RPC("TerrainComplete", RPCMode.OthersBuffered);
     }
 
     void SendTerrain(Ground terrain)
     {
-        networkView.RPC("AddTerrain", RPCMode.OthersBuffered, terrain.Name, terrain.TextureFile, terrain.CharacterCode);
+        NetworkController.networkView.RPC("AddTerrain", RPCMode.OthersBuffered, terrain.Name, terrain.TextureFile, terrain.CharacterCode+"");
     }
 
     void SendRooms()
@@ -65,17 +121,44 @@ public class RemoteView : MonoBehaviour {
         {
             for (int y = 0; y < Campaign.Height; y++)
             {
-                SendRoom(x, y, rooms[x,y]);
+                if (rooms[x, y] != null)
+                {
+                    rooms[x, y].PropertyChanged += room_PropertyChanged;
+                    RoomToLocation.Add(rooms[x, y], new Pair<int, int>(x, y));
+                    if (rooms[x,y].Visible)
+                        SendRoom(x, y, rooms[x, y]);
+                }
             }
         }
     }
 
     void SendRoom(int x, int y, Room room)
     {
-        networkView.RPC("CreateRoom", RPCMode.OthersBuffered, room.GetTerrainString());
+        if (room != null)
+        {
+            NetworkController.networkView.RPC("CreateRoom", RPCMode.OthersBuffered, x, y, room.GetTerrainString());
+            SetRoomXPWorth(x, y, room.XPWorth);
+        }
+        else
+        {
+            DeleteRoom(x, y);
+        }
     }
 
+    void DeleteRoom(int x, int y)
+    {
+        NetworkController.networkView.RPC("DeleteRoom", RPCMode.OthersBuffered, x, y);
+    }
 
+    void SetTerrain(int roomx, int roomy, int x, int y, Ground terrain)
+    {
+        NetworkController.networkView.RPC("SetTerrain", RPCMode.OthersBuffered, roomx, roomy, x, y, terrain.CharacterCode.ToString());
+    }
+
+    void SetRoomXPWorth(int x, int y, int xp)
+    {
+        NetworkController.networkView.RPC("SetRoomXPWorth", RPCMode.OthersBuffered, x, y, xp);
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -85,6 +168,7 @@ public class RemoteView : MonoBehaviour {
     public void Initiate()
     {
         CampaignController.PropertyChanged += CampaignController_PropertyChanged;
+        SendTerrains();
         Campaign = CampaignController.Campaign;
     }
 

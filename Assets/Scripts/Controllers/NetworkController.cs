@@ -19,8 +19,9 @@ public class NetworkController : MonoBehaviour {
     }
 
     [RPC]
-    void CreateCampaign()
+    void DeleteCampaign()
     {
+        Debug.Log("Got campaign");
         Campaign = null;
     }
 
@@ -28,6 +29,7 @@ public class NetworkController : MonoBehaviour {
     [RPC]
     void CreateCampaign(string name)
     {
+        Debug.Log("Got Campaign " + name);
         Campaign = new Campaign();
         Campaign.Name = name;
     }
@@ -47,18 +49,30 @@ public class NetworkController : MonoBehaviour {
     }
 
     [RPC]
+    void SetTerrain(int roomx, int roomy, int x, int y, string terrainCode)
+    {
+        Campaign.GetRoom(roomx, roomy).SetTerrain(x, y, TerrainStorage.GetTerrain(terrainCode[0]));
+    }
+
+    [RPC]
+    void SetRoomXPWorth(int x, int y, int xp)
+    {
+        Campaign.GetRoom(x, y).XPWorth = xp;
+    }
+
+    [RPC]
     void ClearTerrain()
     {
         // nope
     }
 
     [RPC]
-    void AddTerrain(string name, string texturePath, char code)
+    void AddTerrain(string name, string texturePath, string code)
     {
         Ground terrain = new Ground()
         {
             Name = name,
-            CharacterCode = code,
+            CharacterCode = code[0],
             TextureFile = texturePath
         };
         TerrainStorage.AddTerrain(terrain);
@@ -80,7 +94,7 @@ public class NetworkController : MonoBehaviour {
         {
             for (int y = 0; y < Room.Height; y++)
             {
-                room.SetTerrain(x, y, TerrainStorage.GetTerrain(terrainString[x * Room.Height + Room.Height]));
+                room.SetTerrain(x, y, TerrainStorage.GetTerrain(terrainString[x * Room.Height + y]));
             }
         }
     }

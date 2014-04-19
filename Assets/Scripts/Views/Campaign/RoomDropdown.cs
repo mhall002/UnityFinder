@@ -56,13 +56,24 @@ public class RoomDropdown : MonoBehaviour {
                 GUILayout.EndArea();
             }
         }
+        else
+        {
+            GUILayout.BeginArea(Rect);
+            if (GUILayout.Button("View"))
+            {
+                CampaignController.SetRoom(GridX, GridY);
+                Debug.Log("Set room to " + GridX + " : " + GridY);
+                ViewController.State = global::ViewController.ViewState.Room;
+            }
+            GUILayout.EndArea();
+        }
     }
 
     bool Exists = false;
     public void ShowMenu(int GridX, int GridY, Vector2 Position)
     {
         Exists = CampaignController.Campaign.GetRoom(GridX, GridY) != null;
-        if (!Exists)
+        if (!Exists || SessionManager.IsClient)
         {
             Height = 50;
         }

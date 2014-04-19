@@ -81,6 +81,7 @@ public class CampaignGrid : MonoBehaviour {
             int x = int.Parse(indexes[0]);
             int y = int.Parse(indexes[1].Substring(0, indexes[1].IndexOf(']')));
             RoomSquares[x, y].Room = Campaign.GetRoom(x, y);
+            Debug.Log(sender.ToString());
         }
     }
 

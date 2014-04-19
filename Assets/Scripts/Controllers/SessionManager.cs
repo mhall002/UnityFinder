@@ -10,9 +10,10 @@ public class SessionManager : MonoBehaviour {
     public RemoteView RemoteView;
     public NetworkController NetworkController;
 
+    bool isClient = false;
     public bool IsClient
     {
-        get { return Network.isClient; }
+        get { return isClient; }
     }
 
 	void Start () {
@@ -60,6 +61,7 @@ public class SessionManager : MonoBehaviour {
     {
         Network.Connect(hostData[i]);
         NetworkController.gameObject.SetActive(true);
+        isClient = true;
     }
 
 	// Update is called once per frame

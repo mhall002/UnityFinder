@@ -17,7 +17,7 @@ public class GameStatePanel : MonoBehaviour {
         {
             ViewController.State = global::ViewController.ViewState.Campaign;
         }
-        GUILayout.EndArea();
+        GUILayout.EndArea(); 
     }
 
 	// Update is called once per frame
