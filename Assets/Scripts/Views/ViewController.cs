@@ -6,8 +6,8 @@ public class ViewController : MonoBehaviour {
     public GameObject CampaignView;
     public GameObject MenuView;
     public GameObject RoomView;
-    public GameObject ClientRoomView;
-    public GameObject ClientCampaignView;
+    public GameObject ServerRoomView;
+    public GameObject ServerCampaignView;
     public SessionManager SessionManager;
 
     public enum ViewState
@@ -36,34 +36,27 @@ public class ViewController : MonoBehaviour {
         CampaignView.SetActive(false);
         MenuView.SetActive(false);
         RoomView.SetActive(false);
-        ClientCampaignView.SetActive(false);
-        ClientRoomView.SetActive(false);
-        if (SessionManager.IsClient)
-        {
-            if (State == ViewState.Campaign)
-            {
-                ClientCampaignView.SetActive(true);
-            }
-            if (State == ViewState.Room)
-            {
-                ClientRoomView.SetActive(true);
-            }
-        }
-        else
-        {
-            if (State == ViewState.Campaign)
-            {
-                CampaignView.SetActive(true);
-            }
-            if (State == ViewState.Room)
-            {
-                RoomView.SetActive(true);
-            }
-        }
+        
+	    if (State == ViewState.Campaign)
+	    {
+	        CampaignView.SetActive(true);
+	    }
+	    if (State == ViewState.Room)
+	    {
+	        RoomView.SetActive(true);
+	    }
+        
+		if (SessionManager.IsClient)
+		{
+			ServerRoomView.SetActive(false);
+			ServerCampaignView.SetActive(false);
+		}
+
         if (State == ViewState.Menu)
         {
             MenuView.SetActive(true);
         }
+
     }
 
 	// Use this for initialization

@@ -24,6 +24,7 @@ public class MapGrid : MonoBehaviour {
 			campaign = value;
 			if (campaign != null)
 				campaign.PropertyChanged += Campaign_PropertyChanged;
+			UpdateAll();
 		}
 	}
 
@@ -37,20 +38,21 @@ public class MapGrid : MonoBehaviour {
 			int x = int.Parse(indexes[0]);
 			int y = int.Parse(indexes[1].Substring(0, indexes[1].IndexOf(']')));
 			UpdateRoom (x, y);
+			Debug.Log ("MapGrid Got Room Update");
 		}
 	}
 
 	float spacing = 0.75f;
 	Vector3 GetPosition(int x, int y)
 	{
-		return new Vector3 (-Campaign.Width / 2 + (Campaign.Width * spacing) * x - 10.2f,
-		                               -Campaign.Height / 2 + (Campaign.Height * spacing) * y - 4.6f, 0) + gameObject.transform.position;
+		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0) + gameObject.transform.position;
 	}
 
 	Vector3 GetAbsPosition(int x, int y)
 	{
-		return new Vector3 (-Campaign.Width / 2 + (Campaign.Width * spacing) * x - 10.2f,
-		                    -Campaign.Height / 2 + (Campaign.Height * spacing) * y - 4.6f, 0);
+		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
 	}
 
 	public void SetPosition(int x, int y)
@@ -80,6 +82,7 @@ public class MapGrid : MonoBehaviour {
 			{
 				Map [x, y] = (Instantiate(TileGridPrefab, GetPosition (x,y), Quaternion.identity) as GameObject).GetComponent("TileGrid") as TileGrid;
 				Map [x, y].transform.parent = this.transform;
+				Debug.Log ("Created");
 			}
 			Map [x, y].Room = Campaign.GetRoom (x, y);
 		}
@@ -98,13 +101,14 @@ public class MapGrid : MonoBehaviour {
 		if (e.PropertyName.Equals("Campaign"))
 		{
 			Campaign = CampaignController.Campaign;
-			UpdateAll ();
+			Debug.Log ("MapGridCampaignChange");
 		}
 	}
 	 
 	// Use this for initialization
 	void Start () {
-		UpdateAll ();
+		Debug.Log ("Started MapGrid");
+		Campaign = CampaignController.Campaign;
 		CampaignController.PropertyChanged += CampaignController_PropertyChanged;
 	}
 	

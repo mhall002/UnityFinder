@@ -64,10 +64,10 @@ public class RoomDropdown : MonoBehaviour {
                 GUILayout.BeginArea(Rect);
                 if (GUILayout.Button("View"))
                 {
-                    CampaignController.SetRoom(GridX, GridY);
+					CampaignController.SetRoom(GridX, GridY);
+					Debug.Log("Set room to " + GridX + " : " + GridY);
 					MapGrid.SetPosition(GridX, GridY);
-                    Debug.Log("Set room to " + GridX + " : " + GridY);
-                    ViewController.State = global::ViewController.ViewState.Room;
+					ViewController.State = global::ViewController.ViewState.Room;
                 }
                 GUILayout.EndArea();
             }

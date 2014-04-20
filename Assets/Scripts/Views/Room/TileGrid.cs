@@ -45,6 +45,7 @@ public class TileGrid : MonoBehaviour {
 			gameObject.SetActive(true);
             if (Tiles == null)
             {
+				Debug.Log("Creating Tiles");
                 Tiles = new Tile[Room.Height, Room.Width];
                 float x = -10.2f;
                 float y = -4.6f;
