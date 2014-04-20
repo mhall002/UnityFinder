@@ -63,11 +63,13 @@ public class CampaignGrid : MonoBehaviour {
                 if (x < Campaign.Width - 1)
                 {
                     RoomConnectionsRight[x, y] = (Instantiate(connectorPrefab, new Vector3(x*spacing - 9.5f + 0.5f, y*spacing - 4.2f, 0), Quaternion.identity) as GameObject).GetComponent("RoomConnector") as RoomConnector;
+					RoomConnectionsRight[x, y].transform.parent = this.transform;
                     RoomConnectionsRight[x, y].Setup(x, y, x + 1, y);
                 }
                 if (y < Campaign.Height - 1)
                 {
                     RoomConnectionsUp[x, y] = (Instantiate(connectorPrefab, new Vector3(x * spacing - 9.5f, y * spacing - 4.2f + 0.5f, 0), Quaternion.identity) as GameObject).GetComponent("RoomConnector") as RoomConnector;
+					RoomConnectionsUp[x, y].transform.parent = this.transform;
                     RoomConnectionsUp[x, y].Setup(x, y, x, y + 1);
                 }
             }

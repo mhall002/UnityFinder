@@ -8,9 +8,19 @@ public class Tile : MonoBehaviour {
     SpriteStorage SpriteStorage;
     RoomEditor RoomEditor;
     SpriteRenderer Renderer;
-    RoomController RoomController;
-    public int X;
+	CampaignController CampaignController;
+	public int X;
     public int Y;
+	private Room room;
+	public Room Room
+	{
+		get { return room; }
+		set
+		{
+			room = value;
+			Terrain = Room.GetTerrain(X, Y);
+		}
+	}
 
     public Ground Terrain
     {
@@ -21,6 +31,11 @@ public class Tile : MonoBehaviour {
             TerrainChanged();
         }
     }
+
+	public void Notify()
+	{
+		Terrain = Room.GetTerrain(X, Y);
+	}
 
     void TerrainChanged()
     {
@@ -38,7 +53,7 @@ public class Tile : MonoBehaviour {
         GameObject go = GameObject.Find("RoomEditor") as GameObject;
         if (go != null)
             RoomEditor = (RoomEditor)GameObject.Find("RoomEditor").GetComponent("RoomEditor");
-        RoomController = (RoomController)GameObject.Find("RoomController").GetComponent("RoomController");
+		CampaignController = (CampaignController)GameObject.Find("CampaignController").GetComponent("CampaignController");
         if (Renderer == null)
             Renderer = (GetComponent("SpriteRenderer") as SpriteRenderer);
 	}
@@ -53,7 +68,7 @@ public class Tile : MonoBehaviour {
             {
                 this.terrain = RoomEditor.SelectedTerrain;
                 TerrainChanged();
-                RoomController.SetTerrain(X, Y, this.terrain);
+				CampaignController.SetTerrain(Room, X, Y, this.terrain);
             }
             else
             {
@@ -76,7 +91,7 @@ public class Tile : MonoBehaviour {
         {
             this.terrain = RoomEditor.SelectedTerrain;
             TerrainChanged();
-            RoomController.SetTerrain(X, Y, this.terrain);
+			CampaignController.SetTerrain(Room, X, Y, this.terrain);
             Debug.Log("Setting to " + this.terrain.Name);
         }
     }

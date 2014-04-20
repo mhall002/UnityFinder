@@ -79,6 +79,12 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Debug.Log("Creating new room");
     }
 
+	public void SetTerrain(Room room, int x, int y, Ground terrain)
+	{
+		room.SetTerrain(x, y, terrain);
+		room.RoomID = 7;
+	}
+
     public void SetRoom(int gridX, int gridY)
     {
         Room room = Campaign.GetRoom(gridX, gridY);

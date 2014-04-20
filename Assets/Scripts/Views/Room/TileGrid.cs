@@ -23,14 +23,12 @@ public class TileGrid : MonoBehaviour {
     }
 
     
-    public RoomController RoomController;
+    //public RoomController RoomController;
     public GameObject Tile;
     public Tile[,] Tiles;
 
 	// Use this for initialization
 	void Start () {
-        RoomController.PropertyChanged += RoomController_PropertyChanged;
-        Room = RoomController.Room;
         Debug.Log("Started --------------");
         LoadLevel();
 	}
@@ -38,21 +36,13 @@ public class TileGrid : MonoBehaviour {
     void room_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) // TODO improve efficiency
     {
         LoadLevel();
-    }
-
-    void RoomController_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-    {
-        Debug.Log(e.PropertyName);
-        if (e.PropertyName == "Room")
-        {
-            Room = RoomController.Room;
-        }
-    }
+	}
 
     public void LoadLevel()
     {
         if (Room != null)
         {
+			gameObject.SetActive(true);
             if (Tiles == null)
             {
                 Tiles = new Tile[Room.Height, Room.Width];
@@ -64,11 +54,11 @@ public class TileGrid : MonoBehaviour {
                     for (int gridy = 0; gridy < Room.Height; gridy += 1)
                     {
                         y = -4.2f + gridy * 0.75f;
-                        Tile go = (Instantiate(Tile, new Vector3(x, y, 0), Quaternion.identity) as GameObject).GetComponent("Tile") as Tile;
+                        Tile go = (Instantiate(Tile, new Vector3(x, y, 0) + gameObject.transform.position, Quaternion.identity) as GameObject).GetComponent("Tile") as Tile;
                         go.transform.parent = this.transform;
-                        go.Terrain = Room.GetTerrain(gridx, gridy);
                         go.X = gridx;
                         go.Y = gridy;
+						go.Room = Room;
                         Tiles[gridy, gridx] = go;
                     }
                 }
@@ -80,14 +70,14 @@ public class TileGrid : MonoBehaviour {
                     for (int gridy = 0; gridy < Room.Height; gridy += 1)
                     {
                         Tile go = Tiles[gridy, gridx];
-                        go.Terrain = Room.GetTerrain(gridx, gridy);
+						go.Notify();
                     }
                 }
             }
         }
         else
         {
-            Debug.Log("Null Room");
+			Debug.Log("Null Room");
         }
     }
 
