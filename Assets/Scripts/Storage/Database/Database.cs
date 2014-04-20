@@ -14,7 +14,7 @@ namespace AssemblyCSharp
 {
 		public class Database
 		{
-		    public static const string connectionString = "URI=file:UnityFinder";
+		    public const string connectionString = "URI=file:UnityFinder";
 				public Database ()
 				{
                     
