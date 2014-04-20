@@ -79,6 +79,12 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Debug.Log("Creating new room");
     }
 
+	public void SetTerrain(Room room, int x, int y, Ground terrain)
+	{
+		room.SetTerrain(x, y, terrain);
+		room.RoomID = 7;
+	}
+
     public void SetRoom(int gridX, int gridY)
     {
         Room room = Campaign.GetRoom(gridX, gridY);
@@ -111,5 +117,15 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public void SetVisible(int x, int y, bool visible)
     {
         Campaign.GetRoom(x, y).Visible = visible;
+    }
+
+    public void RemoveLink(Pair<int, int> room1, Pair<int, int> room2)
+    {
+        Campaign.AddLink(room1, room2);
+    }
+
+    public void CreateLink(Pair<int,int> room1, Pair<int,int> room2)
+    {
+        Campaign.AddLink(room1, room2);
     }
 }
