@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AssemblyCSharp;
 
 public class CampaignEditorPanel : MonoBehaviour {
 
@@ -37,7 +38,7 @@ public class CampaignEditorPanel : MonoBehaviour {
             }
             if (GUI.Button(GetButtonRect(), "Save"))
             {
-
+                Database database = new Database();
             }
             if (GUI.Button(GetButtonRect(), "Load"))
             {
