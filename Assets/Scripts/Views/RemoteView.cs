@@ -47,8 +47,8 @@ public class RemoteView : MonoBehaviour {
             string[] indexes = property.Split('[')[1].Split(',');
             int x1 = int.Parse(indexes[0]);
             int y1 = int.Parse(indexes[1]);
-            int x2 = int.Parse(indexes[3]);
-            int y2 = int.Parse(indexes[4].Substring(0, indexes[1].IndexOf(']')));
+            int x2 = int.Parse(indexes[2]);
+            int y2 = int.Parse(indexes[3].Substring(0, indexes[1].IndexOf(']')));
             AddLink(x1, y1, x2, y2);
         }
         if (e.PropertyName.StartsWith("RemoveLink"))

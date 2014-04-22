@@ -17,68 +17,7 @@ Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Manage
 Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Mono.Data.Sqlite.dll into Unity Child Domain
 Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Mono.Data.SqliteClient.dll (this message is harmless)
 Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\Mono.Data.SqliteClient.dll into Unity Child Domain
-- Completed reload, in  0.041 seconds
+- Completed reload, in  0.040 seconds
 desktop: 1920x1080 60Hz; virtual: 3600x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp_Data\Managed\System.dll (this message is harmless)
-Server lookup started
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Creating Grid
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-17 x 9
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Got Campaign Name
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Reset the grid
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Received Room
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Active Up 8 4
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Received Room
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Active Up 8 3
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Active Up 8 4
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-Received Room
- 
-(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
-
-The server has disconnected from the client. Most likely the server has shut down.
- 
-(Filename:  Line: 740)
-

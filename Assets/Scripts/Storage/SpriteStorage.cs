@@ -6,7 +6,11 @@ public class SpriteStorage : MonoBehaviour {
 
     public Dictionary<string, Sprite> Sprites = new Dictionary<string,Sprite>();
     public Dictionary<string, Texture> Textures = new Dictionary<string, Texture>();
-
+    public static string[] CharacterSprites = 
+    {
+        "Characters/knight",
+        "Characters/MaleElfRogue",
+    };
 	// Use this for initialization
 	void Start () {
 	

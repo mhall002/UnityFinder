@@ -113,12 +113,14 @@ namespace Assets.Scripts.Models
 		WillSave = 33,
 		ClassAttack = 34,
 		SkillRanks = 35,
-		Initiative = 36,
-		MeleeAttack = 37,
-		RangedAttack = 38,
-		WeaponAttack1 = 39,
-		WeaponAttack2 = 40,
-		ArmorClass = 41
+        HitPointTotal = 36,
+        HitPoints = 37,
+		Initiative = 38,
+		MeleeAttack = 39,
+		RangedAttack = 40,
+		WeaponAttack1 = 41,
+		WeaponAttack2 = 42,
+		ArmorClass = 43
 	}
 
 	public enum StatType
