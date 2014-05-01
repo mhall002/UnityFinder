@@ -7,6 +7,10 @@ using System;
 public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
 
     public TerrainStorage TerrainStorage;
+    public SessionManager SessionManager;
+    public NetworkController NetworkController;
+    public bool IsClient { get { return SessionManager.IsClient; } }
+    public string Username { get { return SessionManager.UserName; } }
 
     private Campaign campaign;
     public Campaign Campaign
@@ -40,8 +44,16 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
 
     public void AddCharacter(Entity character)
     {
-        Campaign.Characters.Add(character);
-        Campaign.CharacterChanged();
+        if (!IsClient)
+        {
+            Debug.Log("Adding character");
+            Campaign.Characters.Add(character);
+            Campaign.CharacterChanged();
+        }
+        else
+        {
+            NetworkController.CreateClientCharacter(character.Name, character.Image);
+        }
     }
 
     public Room InitializeRoom()
@@ -85,6 +97,18 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Campaign.SetRoom(gridX, gridY, room);
         Campaign.ActiveRoom = room;
         Debug.Log("Creating new room");
+    }
+
+    public void MoveEntity(Entity entity, Vector4 position)
+    {
+        if (SessionManager.IsClient)
+        {
+            NetworkController.MoveCharacter(entity, position);
+        }
+        else
+        {
+            entity.Position = position;
+        }
     }
 
 	public void SetTerrain(Room room, int x, int y, Ground terrain)

@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Models;
+using System;
+using System.Collections.Generic;
 
 public class NetworkController : MonoBehaviour {
 
     public TerrainStorage TerrainStorage;
     public CampaignController CampaignController;
+    public RemoteView RemoteView;
+
+    Dictionary<string, Entity> idToEntity = new Dictionary<string, Entity>();
 
     private Campaign campaign;
     public Campaign Campaign
@@ -16,6 +21,22 @@ public class NetworkController : MonoBehaviour {
             campaign = value;
             CampaignController.Campaign = campaign;
         }
+    }
+
+    public void Connect(string username)
+    {
+        RemoteView.networkView.RPC("Connect", RPCMode.Server, username);
+    }
+
+    public void MoveCharacter(Entity entity, Vector4 position)
+    {
+        string uid = entity.Uid.ToString();
+        RemoteView.networkView.RPC("MoveCharacter", RPCMode.Server, uid, position.x, position.y, position.z, position.w);
+    }
+
+    public void CreateClientCharacter(string name, string image)
+    {
+        RemoteView.networkView.RPC("CreateClientCharacter", RPCMode.Server, name, image);
     }
 
     [RPC]
@@ -32,6 +53,60 @@ public class NetworkController : MonoBehaviour {
         Debug.Log("Got Campaign " + name);
         Campaign = new Campaign();
         Campaign.Name = name;
+    }
+
+    [RPC]
+    void CreateCharacter(string uid, string name, string description, string image, string owner, float roomx, float roomy, float tilex, float tiley)
+    {
+        Debug.Log("Creating character from server");
+        bool old = true;
+        if (!idToEntity.ContainsKey(uid))
+        {
+            idToEntity.Add(uid, new Entity(new Guid(uid)));
+            old = false;
+        }
+        Entity entity = idToEntity[uid];
+        entity.Name = name;
+        entity.Description = description;
+        entity.Image = image;
+        entity.Owner = owner;
+        entity.Position = new Vector4(roomx, roomy, tilex, tiley);
+        if (!old)
+        {
+            Campaign.Characters.Add(entity);
+            Campaign.CharacterChanged();
+        }
+    }
+
+    [RPC]
+    void CreateEntity(string uid, string name, string description, string image, string owner, float roomx, float roomy, float tilex, float tiley)
+    {
+        bool old = true;
+        if (!idToEntity.ContainsKey(uid))
+        {
+            idToEntity.Add(uid, new Entity(new Guid(uid)));
+            old = false;
+        }
+        Entity entity = idToEntity[uid];
+        entity.Name = name;
+        entity.Description = description;
+        entity.Image = image;
+        entity.Owner = owner;
+        entity.Position = new Vector4(roomx, roomy, tilex, tiley);
+        if (!old)
+        {
+            Campaign.Entities.Add(entity);
+            Campaign.EntityChanged();
+        }
+    }
+
+    [RPC]
+    void MoveEntity(string uid, float roomx, float roomy, float tilex, float tiley)
+    {
+        Debug.Log("Moving character from server");
+        Entity entity = idToEntity[uid];
+        entity.Name = name;
+        entity.Position = new Vector4(roomx, roomy, tilex, tiley);
     }
 
     [RPC]

@@ -2,12 +2,14 @@
 using System.Collections;
 using Assets.Scripts.Models;
 using System.Collections.Generic;
+using System;
 
 public class RemoteView : MonoBehaviour {
     public CampaignController CampaignController;
     public TerrainStorage TerrainStorage;
     public NetworkController NetworkController;
     private Campaign campaign;
+    private Dictionary<string, string> PlayerToName = new Dictionary<string, string>();
 
     public Campaign Campaign
     {
@@ -61,7 +63,14 @@ public class RemoteView : MonoBehaviour {
             int y2 = int.Parse(indexes[4].Substring(0, indexes[1].IndexOf(']')));
             RemoveLink(x1, y1, x2, y2);
         }
-
+        if (e.PropertyName.StartsWith("Characters"))
+        {
+            SendCharacters();
+        }
+        if (e.PropertyName.StartsWith("Entities"))
+        {
+            SendEntities();
+        }
     }
 
     void room_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -96,7 +105,52 @@ public class RemoteView : MonoBehaviour {
                 DeleteRoom(x, y);
             }
         }
+    }
 
+    void character_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        Entity entity = (Entity) sender;
+        if (e.PropertyName == "Position")
+        {
+            MoveEntity(entity);
+        }
+    }
+
+    [RPC]
+    void Connect(string userName, NetworkMessageInfo info)
+    {
+        Debug.Log("Connected " + info.sender.ToString());
+        PlayerToName[info.sender.ToString()] = userName;
+    }
+
+    [RPC]
+    void MoveCharacter(string uid, int roomx, int roomy, int tilex, int tiley, NetworkMessageInfo info)
+    {
+        Guid guid = new Guid(uid);
+        Vector4 position = new Vector4(roomx, roomy, tilex, tiley);
+        foreach (Entity character in Campaign.Characters)
+        {
+            if (character.Uid == guid)
+            {
+                if (character.Owner == PlayerToName[info.sender.ToString()])
+                    character.Position = position;
+                else
+                    character.Position = character.Position; // causes resend to stupid client
+                break;
+            }
+        }
+    }
+
+    [RPC]
+    void CreateClientCharacter(string name, string image, NetworkMessageInfo info)
+    {
+        Debug.Log("Creating client char");
+        Entity entity = new Entity();
+        entity.Name = name;
+        entity.Image = image;
+        entity.Owner = PlayerToName[info.sender.ToString()];
+        Campaign.Characters.Add(entity);
+        Campaign.CharacterChanged();
     }
 
     void SendAll()
@@ -116,8 +170,46 @@ public class RemoteView : MonoBehaviour {
             NetworkController.networkView.RPC("CreateCampaign", RPCMode.OthersBuffered, Campaign.Name);
             SendRooms();
             SendLinks();
+            SendCharacters();
+            SendEntities();
             Debug.Log("Sent Campaign!");
         }
+    }
+
+    void SendEntities()
+    {
+        foreach (Entity entity in campaign.Entities)
+        {
+            SendEntity(entity);
+        }
+    }
+
+    void SendCharacters()
+    {
+        foreach(Entity character in campaign.Characters)
+        {
+            SendCharacter(character);
+        }
+    }
+
+    void SendCharacter(Entity character)
+    {
+        Debug.Log("Sending character");
+        NetworkController.networkView.RPC("CreateCharacter", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Owner,
+            character.Position.x, character.Position.y, character.Position.z, character.Position.w);
+        character.PropertyChanged += character_PropertyChanged;
+    }
+
+    void SendEntity(Entity character)
+    {
+        NetworkController.networkView.RPC("CreateEntity", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Owner,
+            character.Position.x, character.Position.y, character.Position.z, character.Position.w);
+        character.PropertyChanged += character_PropertyChanged;
+    }
+
+    void MoveEntity(Entity entity)
+    {
+        NetworkController.networkView.RPC("MoveEntity", RPCMode.OthersBuffered, entity.Uid.ToString(), entity.Position.x, entity.Position.y, entity.Position.z, entity.Position.w);
     }
 
     void SendTerrains()

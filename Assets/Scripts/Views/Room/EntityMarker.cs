@@ -45,6 +45,12 @@ public class EntityMarker : MonoBehaviour {
         Debug.Log(transform.position.x);
     }
 
+    public void Preview(Vector4 position)
+    {
+        transform.position = MapGrid.GetPosition(position);
+        Debug.Log("Previewing");
+    }
+
 	// Use this for initialization
 	void Start () {
         CampaignController = (CampaignController)GameObject.Find("CampaignController").GetComponent("CampaignController");

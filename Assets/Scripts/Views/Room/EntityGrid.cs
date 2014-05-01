@@ -24,7 +24,10 @@ public class EntityGrid : MonoBehaviour {
                 campaign.PropertyChanged -= campaign_PropertyChanged;
             campaign = value;
             if (campaign != null)
+            {
                 campaign.PropertyChanged += campaign_PropertyChanged;
+                Load();
+            }
         }
     }
 
@@ -84,9 +87,8 @@ public class EntityGrid : MonoBehaviour {
         if (MapGrid.SelectedEntity != null)
         {
             MouseOverEntityMarker = EntityMarkers[MapGrid.SelectedEntity];
-            if (MapGrid.MouseOverPosition != null)
-                MouseOverEntityMarker.Entity.Position = MapGrid.MouseOverPosition.Value; // TODO - change to campaigncontroller command
-            Debug.Log("Moving selected entity");
+            if (MapGrid.MouseOverPosition != null && (!CampaignController.IsClient || CampaignController.Username == MapGrid.SelectedEntity.Owner))
+                MouseOverEntityMarker.Preview(MapGrid.MouseOverPosition.Value);
         }
     }
 	

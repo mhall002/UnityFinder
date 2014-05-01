@@ -24,8 +24,6 @@ public class MapGrid : MonoBehaviour {
         }
     }
 
-    private Vector4 OldPosition;
-
     private Entity selectedEntity;
     public Entity SelectedEntity
     {
@@ -37,13 +35,9 @@ public class MapGrid : MonoBehaviour {
         {
             if (selectedEntity != null)
             {
-                selectedEntity.Position = OldPosition;
+                selectedEntity.Position = selectedEntity.Position;
             }
             selectedEntity = value;
-            if (selectedEntity != null)
-            {
-                OldPosition = selectedEntity.Position;
-            }
         }
     }
 
@@ -74,8 +68,8 @@ public class MapGrid : MonoBehaviour {
     {
         if (SelectedEntity != null)
         {
-            selectedEntity.Position = position;
-            OldPosition = position;
+            if (!CampaignController.IsClient || CampaignController.Username == SelectedEntity.Owner)
+                selectedEntity.Position = position;
             selectedEntity = null;
         }
         else

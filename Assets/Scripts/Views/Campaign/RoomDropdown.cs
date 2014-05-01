@@ -67,7 +67,7 @@ public class RoomDropdown : MonoBehaviour {
                 {
 					CampaignController.SetRoom(GridX, GridY);
 					Debug.Log("Set room to " + GridX + " : " + GridY);
-                    BoardCamera.transform.position = -MapGrid.GetAbsPosition(GridX, GridY) + new Vector3(0, 0, BoardCamera.transform.position.z);
+                    BoardCamera.transform.position = MapGrid.GetAbsPosition(GridX, GridY) + new Vector3(0, 0, BoardCamera.transform.position.z);
 					ViewController.State = global::ViewController.ViewState.Room;
                 }
                 GUILayout.EndArea();

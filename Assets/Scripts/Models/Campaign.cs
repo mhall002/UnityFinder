@@ -86,7 +86,7 @@ namespace Assets.Scripts.Models
 
         public void EntityChanged()
         {
-            OnPropertyChanged("Entity");
+            OnPropertyChanged("Entities");
         }
 
         public bool HasLink(Pair<int, int> room1, Pair<int, int> room2)

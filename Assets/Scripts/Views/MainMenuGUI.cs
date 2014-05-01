@@ -12,6 +12,7 @@ public class MainMenuGUI : MonoBehaviour {
 	
 	}
 
+    string Username = "Player";
     string[] Servers = null;
     bool WaitingForServers = false;
     bool CreatingCampaign = false;
@@ -55,12 +56,14 @@ public class MainMenuGUI : MonoBehaviour {
 
         if (Servers != null)
         {
-            GUI.Box(new Rect(120, 10, 100, 120), "Games");
+            GUI.Box(new Rect(120, 10, 120, 120), "Games");
+            GUI.Label(new Rect(130, 30, 50, 20), "Name");
+            Username = GUI.TextField(new Rect(120, 180, 50, 20), Username);
             for (int i = 0; i < Servers.Length; i++)
             {
-                if (GUI.Button(new Rect(130,40 + i*30,80,20), Servers[i]))
+                if (GUI.Button(new Rect(130,70 + i*30,100,20), "Join"))
                 {
-                    SessionManager.Connect(i);
+                    SessionManager.Connect(i, Username);
                     Controller.State = ViewController.ViewState.Campaign;
                 }
             }

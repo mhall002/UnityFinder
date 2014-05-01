@@ -9,6 +9,7 @@ public class SessionManager : MonoBehaviour {
 
     public RemoteView RemoteView;
     public NetworkController NetworkController;
+    public string UserName;
 
     bool isClient = false;
     public bool IsClient
@@ -57,11 +58,17 @@ public class SessionManager : MonoBehaviour {
         return null;
     }
 
-    public void Connect(int i)
+    public void Connect(int i, string userName)
     {
         Network.Connect(hostData[i]);
         NetworkController.gameObject.SetActive(true);
+        UserName = userName;
         isClient = true;
+    }
+
+    void OnConnectedToServer()
+    {
+        NetworkController.Connect(UserName);
     }
 
 	// Update is called once per frame

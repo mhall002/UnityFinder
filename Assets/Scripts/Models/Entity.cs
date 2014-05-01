@@ -11,13 +11,24 @@ namespace Assets.Scripts.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Name;
-        public string Description;
-        public bool Visible;
-        public string Image;
-        public int Height;
-        public int Width;
+        public Guid Uid;
+        public string Name = "Bob";
+        public string Description = "";
+        public bool Visible = true;
+        public string Image = "Characters/knight";
+        public int Height = 1;
+        public int Width = 1;
         public EntityType Type;
+
+        public Entity(Guid uid)
+        {
+            Uid = uid;
+        }
+
+        public Entity()
+        {
+            Uid = Guid.NewGuid();
+        }
 
         private Vector4 position;
         public Vector4 Position
@@ -32,7 +43,7 @@ namespace Assets.Scripts.Models
                 OnPropertyChanged("Position");
             }
         }
-        public string Owner;
+        public string Owner = "";
 
         protected void OnPropertyChanged(string name)
         {
