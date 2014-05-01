@@ -38,6 +38,8 @@ public class NetworkController : MonoBehaviour {
     void CreateRoom(int x, int y, string terrain)
     {
         Room room = new Room();
+        room.X = x;
+        room.Y = y;
         SetTerrain(room, terrain);
         Campaign.SetRoom(x, y, room);
         Debug.Log("Received Room");

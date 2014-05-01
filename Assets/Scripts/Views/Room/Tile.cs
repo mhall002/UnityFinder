@@ -4,6 +4,7 @@ using Assets.Scripts.Models;
 
 public class Tile : MonoBehaviour {
 
+    MapGrid MapGrid;
     Ground terrain;
     SpriteStorage SpriteStorage;
     RoomEditor RoomEditor;
@@ -56,6 +57,8 @@ public class Tile : MonoBehaviour {
 		CampaignController = (CampaignController)GameObject.Find("CampaignController").GetComponent("CampaignController");
         if (Renderer == null)
             Renderer = (GetComponent("SpriteRenderer") as SpriteRenderer);
+        if (MapGrid == null)
+            MapGrid = GameObject.Find("MapGrid").GetComponent("MapGrid") as MapGrid;
 	}
 
     bool UsingMouseOverTexture = false;
@@ -75,6 +78,7 @@ public class Tile : MonoBehaviour {
                 Renderer.sprite = SpriteStorage.GetSprite(RoomEditor.SelectedTerrain.TextureFile);
             }
         }
+        MapGrid.GotMouseOver(new Vector4(room.X, room.Y, X, Y));
     }
 
 
@@ -83,6 +87,7 @@ public class Tile : MonoBehaviour {
     {
         if (RoomEditor != null)
             Renderer.sprite = SpriteStorage.GetSprite(Terrain.TextureFile);
+        MapGrid.LostMouseOver(new Vector4(room.X, room.Y, X, Y));
     }
 
     void OnMouseDown()

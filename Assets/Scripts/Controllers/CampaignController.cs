@@ -38,6 +38,12 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Campaign.Name = name;
     }
 
+    public void AddCharacter(Entity character)
+    {
+        Campaign.Characters.Add(character);
+        Campaign.CharacterChanged();
+    }
+
     public Room InitializeRoom()
     {
         Room room = new Room();
@@ -74,6 +80,8 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public void CreateRoom (int gridX, int gridY)
     {
         Room room = InitializeRoom();
+        room.X = gridX;
+        room.Y = gridY;
         Campaign.SetRoom(gridX, gridY, room);
         Campaign.ActiveRoom = room;
         Debug.Log("Creating new room");
@@ -127,5 +135,18 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public void CreateLink(Pair<int,int> room1, Pair<int,int> room2)
     {
         Campaign.AddLink(room1, room2);
+    }
+
+    float spacing = 0.75f;
+    public Vector3 GetPosition(int x, int y)
+    {
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+                            -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0) + gameObject.transform.position;
+    }
+
+    public Vector3 GetAbsPosition(int x, int y)
+    {
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+                            -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
     }
 }

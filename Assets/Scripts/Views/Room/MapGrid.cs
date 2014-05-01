@@ -1,11 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Models;
+using System.ComponentModel;
 
 public class MapGrid : MonoBehaviour {
 
+    public event PropertyChangedEventHandler PropertyChanged;
+
 	public CampaignController CampaignController;
 	public GameObject TileGridPrefab;
+
+    private Vector4? mouseOverPosition;
+    public Vector4? MouseOverPosition
+    {
+        get
+        {
+            return mouseOverPosition;
+        }
+        private set
+        {
+            mouseOverPosition = value;
+            OnPropertyChanged("MouseOverPosition");
+        }
+    }
+
+    public 
 	TileGrid[,] Map = new TileGrid[Campaign.Width, Campaign.Height];
 
 	Campaign campaign;
@@ -28,6 +47,19 @@ public class MapGrid : MonoBehaviour {
 		}
 	}
 
+    public void GotMouseOver(Vector4 position)
+    {
+        MouseOverPosition = position;
+    }
+
+    public void LostMouseOver(Vector4 position)
+    {
+        if (MouseOverPosition != null && position.Equals(MouseOverPosition.Value))
+        {
+            MouseOverPosition = null;
+        }
+    }
+
 	void Campaign_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
 		if (e.PropertyName.StartsWith("Rooms"))
@@ -42,22 +74,23 @@ public class MapGrid : MonoBehaviour {
 		}
 	}
 
-	float spacing = 0.75f;
-	Vector3 GetPosition(int x, int y)
-	{
-		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
-		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0) + gameObject.transform.position;
-	}
-
-	Vector3 GetAbsPosition(int x, int y)
+	static float spacing = 0.75f;
+	public static Vector3 GetPosition(int x, int y)
 	{
 		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
 		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
 	}
 
-	public void SetPosition(int x, int y)
+    public static Vector3 GetPosition(Vector4 position)
+    {
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * position.x - 10.2f * 2,
+                            -Room.Height / 2 + (Room.Height * spacing) * position.y - 4.6f * 2, 0) + new Vector3(spacing * position.z, spacing * position.w);
+    }
+
+	public Vector3 GetAbsPosition(int x, int y)
 	{
-		this.transform.position = -GetAbsPosition(x, y);
+		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
 	}
 
 	void UpdateAll()
@@ -116,4 +149,13 @@ public class MapGrid : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    protected void OnPropertyChanged(string name)
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null)
+        {
+            handler(this, new PropertyChangedEventArgs(name));
+        }
+    }
 }

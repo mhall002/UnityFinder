@@ -11,6 +11,7 @@ public class CampaignPanel : MonoBehaviour {
 	public GUIStyle CharacterWindowStyle;
     public GUIStyle CharacterImageStyle;
     public SpriteStorage SpriteStorage;
+    public CampaignController CampaignController;
 
 	// Use this for initialization
 	void Start () 
@@ -242,8 +243,7 @@ public class CampaignPanel : MonoBehaviour {
     bool choosingImage = false;
 	void CreateCharacterWindow(int windowID)
 	{
-        
-            Character character = CharacterController.Character;
+        Character character = CharacterController.Character;
         
 		Rect currentLeft = new Rect(10, 50, 80, 20);
 		Rect currentRight = new Rect(100, 50, 100, 20);
@@ -294,7 +294,50 @@ public class CampaignPanel : MonoBehaviour {
         CreateSkillSection(character);
 	}
 
-	Rect WindowRect = new Rect(130,10,800,400);
+    Entity CreatingCharacter;
+    void CreateSimpleCharacterWindow(int windowID)
+    {
+        if (CreatingCharacter == null)
+            CreatingCharacter = new Entity();
+
+        Rect current = new Rect(10, 50, 300, 50);
+        Rect Icon = new Rect(10, 10, 75, 75);
+
+        if (CreatingCharacter.Image == null)
+        {
+            CreatingCharacter.Image = "Characters/knight";
+            CreatingCharacter.Name = "Joe";
+        }
+
+        if (GUI.Button(Icon, SpriteStorage.GetTexture(CreatingCharacter.Image)))
+        {
+            choosingImage = !choosingImage;
+            selectedImage = -1;
+        }
+
+        if (choosingImage && selectedImage >= 0)
+        {
+            choosingImage = false;
+            CreatingCharacter.Image = SpriteStorage.CharacterSprites[selectedImage];
+        }
+
+        int y = 75;
+
+        Rect currentLeft = new Rect(100, 10, 80, 20);
+        Rect currentRight = new Rect(100, 40, 80, 20);
+        GUI.Label(currentLeft, "Name");
+
+        CreatingCharacter.Name = GUI.TextField(currentRight, CreatingCharacter.Name);
+        y += 30;
+
+        if (GUI.Button(new Rect(10, 80, 200, 30), "Create"))
+        {
+            CampaignController.AddCharacter(CreatingCharacter);
+            CreatingCharacter = null;
+        }
+    }
+
+	Rect WindowRect = new Rect(130,10,220,120);
 	bool CharacterWindowShown = false;
 
 	void OnGUI()
@@ -312,7 +355,7 @@ public class CampaignPanel : MonoBehaviour {
 
 		if (CharacterWindowShown)
 		{
-			WindowRect = GUI.Window (0, WindowRect, CreateCharacterWindow, "", CharacterWindowStyle);
+			WindowRect = GUI.Window (0, WindowRect, CreateSimpleCharacterWindow, "", CharacterWindowStyle);
 		}
 
         if (choosingImage)

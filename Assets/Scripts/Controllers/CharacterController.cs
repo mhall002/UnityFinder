@@ -178,7 +178,6 @@ public class CharacterController : MonoBehaviour {
 		character.Level = 0;
 		character.Height = 1;
 		character.Width = 1;
-		character.XPWorth = 0;
 		foreach (StatName statName in Enum.GetValues(typeof(StatName)))
 		{
 			character.SetStat(statName, 0);

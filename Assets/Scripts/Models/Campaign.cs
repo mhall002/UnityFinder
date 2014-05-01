@@ -53,7 +53,8 @@ namespace Assets.Scripts.Models
             }
         }
 
-        public List<Character> Characters;
+        public List<Entity> Characters = new List<Entity>();
+        public List<Entity> Entities = new List<Entity>();
         private List<Pair<Pair<int, int>, Pair<int, int>>> RoomLinks = new List<Pair<Pair<int, int>, Pair<int, int>>>();
         private Room[,] Rooms; // 17 * 9
 
@@ -81,6 +82,11 @@ namespace Assets.Scripts.Models
         public void CharacterChanged() // HACK - no observable collection??
         {
             OnPropertyChanged("Characters");
+        }
+
+        public void EntityChanged()
+        {
+            OnPropertyChanged("Entity");
         }
 
         public bool HasLink(Pair<int, int> room1, Pair<int, int> room2)

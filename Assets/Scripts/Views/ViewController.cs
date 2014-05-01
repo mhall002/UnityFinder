@@ -9,6 +9,8 @@ public class ViewController : MonoBehaviour {
     public GameObject ServerRoomView;
     public GameObject ServerCampaignView;
     public SessionManager SessionManager;
+    public GameObject CampaignCamera;
+    public GameObject BoardCamera;
 
     public enum ViewState
     {
@@ -40,10 +42,14 @@ public class ViewController : MonoBehaviour {
 	    if (State == ViewState.Campaign)
 	    {
 	        CampaignView.SetActive(true);
+            CampaignCamera.SetActive(true);
+            BoardCamera.SetActive(false);
 	    }
 	    if (State == ViewState.Room)
 	    {
 	        RoomView.SetActive(true);
+            CampaignCamera.SetActive(false);
+            BoardCamera.SetActive(true);
 	    }
         
 		if (SessionManager.IsClient)
