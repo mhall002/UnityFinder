@@ -4,6 +4,8 @@ using Assets.Scripts.Models;
 
 public class EntityMarker : MonoBehaviour {
 
+    MapGrid MapGrid;
+
     private Entity entity;
     public Entity Entity
     {
@@ -38,8 +40,9 @@ public class EntityMarker : MonoBehaviour {
             Renderer = (GetComponent("SpriteRenderer") as SpriteRenderer);
         Renderer.sprite = SpriteStorage.GetSprite(Entity.Image);
         transform.localScale = new Vector3(0.75f / Renderer.sprite.bounds.size.x, 0.75f / Renderer.sprite.bounds.size.y, 1);
-        Debug.Log(Entity.Position.z);
+        //Debug.Log(Entity.Position.z);
         transform.position = MapGrid.GetPosition(entity.Position);
+        Debug.Log(transform.position.x);
     }
 
 	// Use this for initialization
@@ -47,8 +50,9 @@ public class EntityMarker : MonoBehaviour {
         CampaignController = (CampaignController)GameObject.Find("CampaignController").GetComponent("CampaignController");
         if (Renderer == null)
             Renderer = (GetComponent("SpriteRenderer") as SpriteRenderer);
+        MapGrid = (MapGrid)GameObject.Find("MapGrid").GetComponent("MapGrid");
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	

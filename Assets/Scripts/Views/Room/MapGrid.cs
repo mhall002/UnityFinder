@@ -24,6 +24,29 @@ public class MapGrid : MonoBehaviour {
         }
     }
 
+    private Vector4 OldPosition;
+
+    private Entity selectedEntity;
+    public Entity SelectedEntity
+    {
+        get
+        {
+            return selectedEntity;
+        }
+        set
+        {
+            if (selectedEntity != null)
+            {
+                selectedEntity.Position = OldPosition;
+            }
+            selectedEntity = value;
+            if (selectedEntity != null)
+            {
+                OldPosition = selectedEntity.Position;
+            }
+        }
+    }
+
     public 
 	TileGrid[,] Map = new TileGrid[Campaign.Width, Campaign.Height];
 
@@ -47,9 +70,39 @@ public class MapGrid : MonoBehaviour {
 		}
 	}
 
+    public void GotMouseDown(Vector4 position)
+    {
+        if (SelectedEntity != null)
+        {
+            selectedEntity.Position = position;
+            OldPosition = position;
+            selectedEntity = null;
+        }
+        else
+        {
+            foreach (Entity character in campaign.Characters)
+            {
+                if (character.Position == position)
+                {
+                    SelectedEntity = character;
+                }
+            }
+
+            foreach (Entity entity in campaign.Entities)
+            {
+                if (entity.Position == position)
+                {
+                    SelectedEntity = entity;
+                }
+            }
+        }
+        
+    }
+
     public void GotMouseOver(Vector4 position)
     {
         MouseOverPosition = position;
+        Debug.Log("MapGrid got mouse over");
     }
 
     public void LostMouseOver(Vector4 position)
@@ -83,8 +136,8 @@ public class MapGrid : MonoBehaviour {
 
     public static Vector3 GetPosition(Vector4 position)
     {
-        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * position.x - 10.2f * 2,
-                            -Room.Height / 2 + (Room.Height * spacing) * position.y - 4.6f * 2, 0) + new Vector3(spacing * position.z, spacing * position.w);
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * position.x - 10.2f - 9.5f,
+                            -Room.Height / 2 + (Room.Height * spacing) * position.y - 4.6f - 4.2f, 0) + new Vector3(spacing * position.z, spacing * position.w);
     }
 
 	public Vector3 GetAbsPosition(int x, int y)

@@ -55,6 +55,7 @@ public class EntityGrid : MonoBehaviour {
             if (!EntityMarkers.ContainsKey(entity))
             {
                 EntityMarker marker = (Instantiate(EntityMarker, MapGrid.GetPosition(entity.Position), Quaternion.identity) as GameObject).GetComponent("EntityMarker") as EntityMarker;
+                marker.Entity = entity;
                 marker.transform.parent = transform;
                 EntityMarkers[entity] = marker;
             }
@@ -64,6 +65,7 @@ public class EntityGrid : MonoBehaviour {
             if (!EntityMarkers.ContainsKey(entity))
             {
                 EntityMarker marker = (Instantiate(EntityMarker, MapGrid.GetPosition(entity.Position), Quaternion.identity) as GameObject).GetComponent("EntityMarker") as EntityMarker;
+                marker.Entity = entity;
                 marker.transform.parent = transform;
                 EntityMarkers[entity] = marker;
             }
@@ -79,12 +81,11 @@ public class EntityGrid : MonoBehaviour {
 
     void MapGrid_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (GameStatePanel.SelectedEntity != null)
+        if (MapGrid.SelectedEntity != null)
         {
-            if (MouseOverEntityMarker.Entity != GameStatePanel.SelectedEntity)
-                MouseOverEntityMarker.Entity = GameStatePanel.SelectedEntity;
+            MouseOverEntityMarker = EntityMarkers[MapGrid.SelectedEntity];
             if (MapGrid.MouseOverPosition != null)
-                MouseOverEntityMarker.Entity.Position = MapGrid.MouseOverPosition.Value;
+                MouseOverEntityMarker.Entity.Position = MapGrid.MouseOverPosition.Value; // TODO - change to campaigncontroller command
             Debug.Log("Moving selected entity");
         }
     }

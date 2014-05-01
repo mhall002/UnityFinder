@@ -79,6 +79,7 @@ public class Tile : MonoBehaviour {
             }
         }
         MapGrid.GotMouseOver(new Vector4(room.X, room.Y, X, Y));
+        Debug.Log(transform.position.x);
     }
 
 
@@ -99,6 +100,7 @@ public class Tile : MonoBehaviour {
 			CampaignController.SetTerrain(Room, X, Y, this.terrain);
             Debug.Log("Setting to " + this.terrain.Name);
         }
+        MapGrid.GotMouseDown(new Vector4(room.X, room.Y, X, Y));
     }
 
 	// Update is called once per frame
