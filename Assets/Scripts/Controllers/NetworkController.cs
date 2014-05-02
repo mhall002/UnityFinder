@@ -30,6 +30,7 @@ public class NetworkController : MonoBehaviour {
 
     public void MoveCharacter(Entity entity, Vector4 position)
     {
+        Debug.Log("Moving character over network...");
         string uid = entity.Uid.ToString();
         RemoteView.networkView.RPC("MoveCharacter", RPCMode.Server, uid, position.x, position.y, position.z, position.w);
     }

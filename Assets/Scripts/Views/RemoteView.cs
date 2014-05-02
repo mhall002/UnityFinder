@@ -138,7 +138,7 @@ public class RemoteView : MonoBehaviour {
     }
 
     [RPC]
-    void MoveCharacter(string uid, int roomx, int roomy, int tilex, int tiley, NetworkMessageInfo info)
+    void MoveCharacter(string uid, float roomx, float roomy, float tilex, float tiley, NetworkMessageInfo info)
     {
         Guid guid = new Guid(uid);
         Vector4 position = new Vector4(roomx, roomy, tilex, tiley);
@@ -223,6 +223,7 @@ public class RemoteView : MonoBehaviour {
 
     void MoveEntity(Entity entity)
     {
+        Debug.Log("Sending Move");
         NetworkController.networkView.RPC("MoveEntity", RPCMode.OthersBuffered, entity.Uid.ToString(), entity.Position.x, entity.Position.y, entity.Position.z, entity.Position.w);
     }
 

@@ -17,16 +17,25 @@ public class SessionManager : MonoBehaviour {
         get { return isClient; }
     }
 
+    public bool Active
+    {
+        get;
+        private set;
+    }
+
 	void Start () {
         DontDestroyOnLoad(this);
+        Active = false;
 	}
 	
     public void StartServer()
     {
-        Network.InitializeServer(32, 25001, !Network.HavePublicAddress());
+        Network.InitializeServer(32, 25002, !Network.HavePublicAddress());
+        UserName = "GM";
         MasterServer.RegisterHost("mhall002UnityFinder", "Game 1");
         RemoteView.gameObject.SetActive(true);
         RemoteView.Initiate();
+        Active = true;
     }
 
     public void StartServerLookup()
@@ -64,6 +73,7 @@ public class SessionManager : MonoBehaviour {
         NetworkController.gameObject.SetActive(true);
         UserName = userName;
         isClient = true;
+        Active = true;
     }
 
     void OnConnectedToServer()

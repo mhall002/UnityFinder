@@ -24,7 +24,30 @@ public class EntityStorage : MonoBehaviour
                 Description = "Bestiary 1 - Page 67",
                 Image = "Characters/knight"
             };
+            Entities.Add(entity.Uid, entity);
 
+            entity = new Entity()
+            {
+                Name = "Goblin Warrior 1",
+                Description = "Bestiary 1 - Page 67",
+                Image = "Creatures/GoblinWarrior"
+            };
+            Entities.Add(entity.Uid, entity);
+
+            entity = new Entity()
+            {
+                Name = "Goblin Warrior 2",
+                Description = "Bestiary 1 - Page 67",
+                Image = "Creatures/GoblinWarrior2"
+            };
+            Entities.Add(entity.Uid, entity);
+
+            entity = new Entity()
+            {
+                Name = "Goblin Mage",
+                Description = "Bestiary 1 - Page 67",
+                Image = "Creatures/GoblinMage"
+            };
             Entities.Add(entity.Uid, entity);
         }
 

@@ -72,7 +72,9 @@ public class MapGrid : MonoBehaviour {
         if (SelectedEntity != null)
         {
             if (!CampaignController.IsClient || CampaignController.Username == SelectedEntity.Owner)
-                selectedEntity.Position = position;
+            {
+                CampaignController.MoveEntity(selectedEntity, position);
+            }
             selectedEntity = null;
             CloneSelected = false;
         }
@@ -208,7 +210,7 @@ public class MapGrid : MonoBehaviour {
         {
             if (selectedEntity != null)
             {
-                if (Campaign.Characters.Contains(selectedEntity))
+                if (Campaign.Characters.Contains(selectedEntity) && !CampaignController.IsClient)
                 {
                     CampaignController.DeleteCharacter(selectedEntity);
                 }
