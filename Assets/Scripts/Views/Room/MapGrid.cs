@@ -6,9 +6,11 @@ using System.ComponentModel;
 public class MapGrid : MonoBehaviour {
 
     public event PropertyChangedEventHandler PropertyChanged;
-
+    public SessionManager SessionManager;
 	public CampaignController CampaignController;
 	public GameObject TileGridPrefab;
+    public GameObject PingPrefab;
+    public Camera RoomCamera;
 
     private Vector4? mouseOverPosition;
     public Vector4? MouseOverPosition
@@ -66,6 +68,24 @@ public class MapGrid : MonoBehaviour {
 			UpdateAll();
 		}
 	}
+
+    [RPC]
+    public void CreatePing(Vector3 position)
+    {
+        GameObject go = Instantiate(PingPrefab, position, Quaternion.identity) as GameObject;
+        go.transform.parent = transform;
+    }
+
+    public void SendPing(Vector3 position)
+    {
+        position.z = 2;
+        if (SessionManager.Active)
+            networkView.RPC("CreatePing", RPCMode.All, position);
+        else
+            CreatePing(position);
+    }
+
+
 
     public void GotMouseDown(Vector4 position)
     {
@@ -220,6 +240,11 @@ public class MapGrid : MonoBehaviour {
                 }
                 SelectedEntity = null;
             }
+        }
+
+        if (Input.GetKeyDown("q"))
+        {
+            SendPing(RoomCamera.ScreenToWorldPoint(Input.mousePosition));
         }
 	}
 
