@@ -79,7 +79,6 @@ public class Tile : MonoBehaviour {
             }
         }
         MapGrid.GotMouseOver(new Vector4(room.X, room.Y, X, Y));
-        Debug.Log(transform.position.x);
     }
 
 

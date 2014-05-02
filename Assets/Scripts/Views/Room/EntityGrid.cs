@@ -35,7 +35,7 @@ public class EntityGrid : MonoBehaviour {
 
     void campaign_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) // TODO improve efficiency
     {
-        if (e.PropertyName == "Characters" || e.PropertyName == "Entities")
+        if (e.PropertyName.StartsWith("Characters") || e.PropertyName.StartsWith("Entities"))
         {
             Load();
         }
@@ -72,6 +72,19 @@ public class EntityGrid : MonoBehaviour {
                 marker.transform.parent = transform;
                 EntityMarkers[entity] = marker;
             }
+        }
+        List<Entity> marked = new List<Entity>();
+        foreach (Entity entity in EntityMarkers.Keys)
+        {
+            if (!entities.Contains(entity) && !characters.Contains(entity))
+            {
+                marked.Add(entity);
+            }
+        }
+        foreach (Entity entity in marked)
+        {
+            Destroy(EntityMarkers[entity].gameObject);
+            EntityMarkers.Remove(entity);
         }
     }
 

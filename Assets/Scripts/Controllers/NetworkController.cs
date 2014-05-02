@@ -74,7 +74,7 @@ public class NetworkController : MonoBehaviour {
         if (!old)
         {
             Campaign.Characters.Add(entity);
-            Campaign.CharacterChanged();
+            Campaign.CharacterChanged(entity.Uid.ToString());
         }
     }
 
@@ -96,7 +96,45 @@ public class NetworkController : MonoBehaviour {
         if (!old)
         {
             Campaign.Entities.Add(entity);
-            Campaign.EntityChanged();
+            Campaign.EntityChanged(entity.Uid.ToString());
+        }
+    }
+
+    [RPC]
+    void DeleteCharacter(string uid)
+    {
+        Guid guid = new Guid(uid);
+        Entity toDelete = null;
+        foreach (Entity character in Campaign.Characters)
+        {
+            if (guid == character.Uid)
+            {
+                toDelete = character;
+                break;
+            }
+        }
+        if (toDelete != null)
+        {
+            CampaignController.DeleteCharacter(toDelete);
+        }
+    }
+
+    [RPC]
+    void DeleteEntity(string uid)
+    {
+        Guid guid = new Guid(uid);
+        Entity toDelete = null;
+        foreach (Entity entity in Campaign.Entities)
+        {
+            if (guid == entity.Uid)
+            {
+                toDelete = entity;
+                break;
+            }
+        }
+        if (toDelete != null)
+        {
+            CampaignController.DeleteEntity(toDelete);
         }
     }
 

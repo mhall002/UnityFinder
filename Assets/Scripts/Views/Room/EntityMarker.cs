@@ -48,7 +48,6 @@ public class EntityMarker : MonoBehaviour {
     public void Preview(Vector4 position)
     {
         transform.position = MapGrid.GetPosition(position);
-        Debug.Log("Previewing");
     }
 
 	// Use this for initialization

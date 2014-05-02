@@ -35,7 +35,10 @@ public class MapGrid : MonoBehaviour {
         {
             if (selectedEntity != null)
             {
-                selectedEntity.Position = selectedEntity.Position;
+                if (CloneSelected)
+                    CampaignController.DeleteEntity(selectedEntity);
+                else
+                    selectedEntity.Position = selectedEntity.Position;
             }
             selectedEntity = value;
         }
@@ -71,6 +74,7 @@ public class MapGrid : MonoBehaviour {
             if (!CampaignController.IsClient || CampaignController.Username == SelectedEntity.Owner)
                 selectedEntity.Position = position;
             selectedEntity = null;
+            CloneSelected = false;
         }
         else
         {
@@ -96,7 +100,6 @@ public class MapGrid : MonoBehaviour {
     public void GotMouseOver(Vector4 position)
     {
         MouseOverPosition = position;
-        Debug.Log("MapGrid got mouse over");
     }
 
     public void LostMouseOver(Vector4 position)
@@ -105,6 +108,13 @@ public class MapGrid : MonoBehaviour {
         {
             MouseOverPosition = null;
         }
+    }
+
+    bool CloneSelected = false;
+    public void SelectClone(Entity clone)
+    {
+        Entity entity = CampaignController.CreateClone(clone);
+        selectedEntity = entity;
     }
 
 	void Campaign_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -194,7 +204,21 @@ public class MapGrid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if (Input.GetKeyDown("x"))
+        {
+            if (selectedEntity != null)
+            {
+                if (Campaign.Characters.Contains(selectedEntity))
+                {
+                    CampaignController.DeleteCharacter(selectedEntity);
+                }
+                if (Campaign.Entities.Contains(selectedEntity))
+                {
+                    CampaignController.DeleteEntity(selectedEntity);
+                }
+                SelectedEntity = null;
+            }
+        }
 	}
 
     protected void OnPropertyChanged(string name)

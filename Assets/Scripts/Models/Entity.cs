@@ -30,6 +30,17 @@ namespace Assets.Scripts.Models
             Uid = Guid.NewGuid();
         }
 
+        public static Entity Clone(Entity entity)
+        {
+            Entity clone = new Entity();
+            clone.Name = entity.Name;
+            clone.Description = entity.Description;
+            clone.Image = entity.Image;
+            clone.Height = entity.Height;
+            clone.Width = entity.Width;
+            return clone;
+        }
+
         private Vector4 position;
         public Vector4 Position
         {

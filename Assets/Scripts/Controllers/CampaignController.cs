@@ -48,12 +48,62 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         {
             Debug.Log("Adding character");
             Campaign.Characters.Add(character);
-            Campaign.CharacterChanged();
+            Campaign.CharacterChanged(character.Uid.ToString());
         }
         else
         {
             NetworkController.CreateClientCharacter(character.Name, character.Image);
         }
+    }
+
+    public Entity CreateClone(Entity entity)
+    {
+        Entity clone = Entity.Clone(entity);
+        Campaign.Entities.Add(clone);
+        Campaign.EntityChanged(clone.Uid.ToString());
+        return clone;
+    }
+
+    public void DeleteEntity(Entity entity)
+    {
+        string uid = entity.Uid.ToString();
+        Campaign.Entities.Remove(entity);
+        Debug.Log("Deleting " + Campaign.Entities.Count);
+        Campaign.EntityChanged(uid);
+    }
+
+    public void DeleteCharacter(Entity character)
+    {
+        string uid = character.Uid.ToString();
+        Campaign.Characters.Remove(character);
+        Campaign.CharacterChanged(uid);
+    }
+
+    
+    public Entity GetEntity(string uid)
+    {
+        Guid guid = new Guid(uid);
+        foreach (Entity entity in Campaign.Entities)
+        {
+            if (entity.Uid == guid)
+            {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public Entity GetCharacter(string uid)
+    {
+        Guid guid = new Guid(uid);
+        foreach (Entity entity in Campaign.Characters)
+        {
+            if (entity.Uid == guid)
+            {
+                return entity;
+            }
+        }
+        return null;
     }
 
     public Room InitializeRoom()

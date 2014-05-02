@@ -65,11 +65,25 @@ public class RemoteView : MonoBehaviour {
         }
         if (e.PropertyName.StartsWith("Characters"))
         {
-            SendCharacters();
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(']');
+            string uid = indexes[0];
+            Entity entity = CampaignController.GetCharacter(uid);
+            if (entity != null)
+                SendCharacter(entity);
+            else
+                DeleteCharacter(uid);
         }
         if (e.PropertyName.StartsWith("Entities"))
         {
-            SendEntities();
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(']');
+            string uid = indexes[0];
+            Entity entity = CampaignController.GetEntity(uid);
+            if (entity != null)
+                SendEntity(entity);
+            else
+                DeleteEntity(uid);
         }
     }
 
@@ -149,8 +163,7 @@ public class RemoteView : MonoBehaviour {
         entity.Name = name;
         entity.Image = image;
         entity.Owner = PlayerToName[info.sender.ToString()];
-        Campaign.Characters.Add(entity);
-        Campaign.CharacterChanged();
+        CampaignController.AddCharacter(entity);
     }
 
     void SendAll()
@@ -202,6 +215,7 @@ public class RemoteView : MonoBehaviour {
 
     void SendEntity(Entity character)
     {
+        Debug.Log("Sending entity");
         NetworkController.networkView.RPC("CreateEntity", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Owner,
             character.Position.x, character.Position.y, character.Position.z, character.Position.w);
         character.PropertyChanged += character_PropertyChanged;
@@ -210,6 +224,17 @@ public class RemoteView : MonoBehaviour {
     void MoveEntity(Entity entity)
     {
         NetworkController.networkView.RPC("MoveEntity", RPCMode.OthersBuffered, entity.Uid.ToString(), entity.Position.x, entity.Position.y, entity.Position.z, entity.Position.w);
+    }
+
+    void DeleteCharacter(string uid)
+    {
+        NetworkController.networkView.RPC("DeleteCharacter", RPCMode.OthersBuffered, uid);
+    }
+
+    void DeleteEntity(string uid)
+    {
+        Debug.Log("Deleting entity");
+        NetworkController.networkView.RPC("DeleteEntity", RPCMode.OthersBuffered, uid);
     }
 
     void SendTerrains()

@@ -79,14 +79,14 @@ namespace Assets.Scripts.Models
             Dictionary<int, int> RoomLinks = new Dictionary<int, int>();
         }
 
-        public void CharacterChanged() // HACK - no observable collection??
+        public void CharacterChanged(string uid) // HACK - no observable collection??
         {
-            OnPropertyChanged("Characters");
+            OnPropertyChanged("Characters[" + uid + "]");
         }
 
-        public void EntityChanged()
+        public void EntityChanged(string uid)
         {
-            OnPropertyChanged("Entities");
+            OnPropertyChanged("Entities[" + uid + "]");
         }
 
         public bool HasLink(Pair<int, int> room1, Pair<int, int> room2)
