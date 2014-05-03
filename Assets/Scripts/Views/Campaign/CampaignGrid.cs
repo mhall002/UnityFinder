@@ -35,7 +35,6 @@ public class CampaignGrid : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //Creates the grid of Add Room
-        Debug.Log("Creating Grid");
         RoomSquares = new RoomIcon[17, 9];
         RoomConnectionsRight = new RoomConnector[16, 9];
         RoomConnectionsUp = new RoomConnector[17, 8];
@@ -74,7 +73,6 @@ public class CampaignGrid : MonoBehaviour {
                 }
             }
         }
-        Debug.Log(xCounter + " x " + yCounter);
 
         CampaignController.PropertyChanged += CampaignController_PropertyChanged;
         Campaign = CampaignController.Campaign;

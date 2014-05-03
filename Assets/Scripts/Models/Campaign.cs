@@ -52,7 +52,7 @@ namespace Assets.Scripts.Models
                 OnPropertyChanged("Name");
             }
         }
-
+        public int ID;
         public List<Character> Characters;
         private List<Pair<Pair<int, int>, Pair<int, int>>> RoomLinks = new List<Pair<Pair<int, int>, Pair<int, int>>>();
         private Room[,] Rooms; // 17 * 9

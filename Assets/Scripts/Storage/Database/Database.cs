@@ -14,7 +14,7 @@ namespace AssemblyCSharp
 {
 		public class Database
 		{
-		    public const string connectionString = "URI=file:UnityFinder";
+		    public const string connectionString = "URI=file:/SQL/UnityFinder";
 				public Database ()
 				{
                     
@@ -46,6 +46,38 @@ namespace AssemblyCSharp
                     dbConnection.Close();
                     dbConnection = null;
                 }
-		}
+
+                public static SqliteDataReader runSelectQuery(SqliteConnection connection, SqliteCommand command)
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+
+
+                    return reader;
+                }
+
+                public static SqliteDataReader runSelectQuery(SqliteConnection connection, string sqlText)
+                {
+                    if (sqlText != "")
+                    {
+                        connection.Open();
+                        var command = new SqliteCommand(sqlText, connection);
+                        var reader = command.ExecuteReader();
+
+                        return reader;
+                    }
+                    return null;
+                }
+
+                public static int runModifyQuery(SqliteConnection connection, SqliteCommand command)
+                {
+                    connection.Open();
+                    int modifiedRows = 0;
+                    modifiedRows = command.ExecuteNonQuery();
+
+
+                    return modifiedRows;
+                }
+        }
 }
 
