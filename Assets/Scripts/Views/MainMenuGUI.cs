@@ -12,6 +12,7 @@ public class MainMenuGUI : MonoBehaviour {
 	
 	}
 
+    string Username = "Player";
     string[] Servers = null;
     bool WaitingForServers = false;
     bool CreatingCampaign = false;
@@ -43,10 +44,10 @@ public class MainMenuGUI : MonoBehaviour {
 
         if (CreatingCampaign)
         {
-            GUI.Box(new Rect(230, 10, 220, 120), "Create Campaign");
+            GUI.Box(new Rect(330, 10, 220, 120), "Create Campaign");
             
-            campaignName = GUI.TextField(new Rect(240,40,200,30), campaignName);
-            if (GUI.Button(new Rect(240,100, 200, 20), "Create"))
+            campaignName = GUI.TextField(new Rect(340,40,200,30), campaignName);
+            if (GUI.Button(new Rect(340,100, 200, 20), "Create"))
             {
                 CampaignController.CreateCampaign(campaignName);
                 Controller.State = ViewController.ViewState.Campaign;
@@ -55,12 +56,14 @@ public class MainMenuGUI : MonoBehaviour {
 
         if (Servers != null)
         {
-            GUI.Box(new Rect(120, 10, 100, 120), "Games");
+            GUI.Box(new Rect(120, 10, 200, 120), "");
+            GUI.Label(new Rect(130, 30, 50, 20), "Name");
+            Username = GUI.TextField(new Rect(180, 30, 120, 20), Username);
             for (int i = 0; i < Servers.Length; i++)
             {
-                if (GUI.Button(new Rect(130,40 + i*30,80,20), Servers[i]))
+                if (GUI.Button(new Rect(130,70 + i*30,180,20), "Join"))
                 {
-                    SessionManager.Connect(i);
+                    SessionManager.Connect(i, Username);
                     Controller.State = ViewController.ViewState.Campaign;
                 }
             }

@@ -7,6 +7,10 @@ using System;
 public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
 
     public TerrainStorage TerrainStorage;
+    public SessionManager SessionManager;
+    public NetworkController NetworkController;
+    public bool IsClient { get { return SessionManager.IsClient; } }
+    public string Username { get { return SessionManager.UserName; } }
 
     private Campaign campaign;
     public Campaign Campaign
@@ -36,6 +40,70 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     {
         Campaign = new Campaign();
         Campaign.Name = name;
+    }
+
+    public void AddCharacter(Entity character)
+    {
+        if (!IsClient)
+        {
+            Debug.Log("Adding character");
+            Campaign.Characters.Add(character);
+            Campaign.CharacterChanged(character.Uid.ToString());
+        }
+        else
+        {
+            NetworkController.CreateClientCharacter(character.Name, character.Image);
+        }
+    }
+
+    public Entity CreateClone(Entity entity)
+    {
+        Entity clone = Entity.Clone(entity);
+        Campaign.Entities.Add(clone);
+        Campaign.EntityChanged(clone.Uid.ToString());
+        return clone;
+    }
+
+    public void DeleteEntity(Entity entity)
+    {
+        string uid = entity.Uid.ToString();
+        Campaign.Entities.Remove(entity);
+        Debug.Log("Deleting " + Campaign.Entities.Count);
+        Campaign.EntityChanged(uid);
+    }
+
+    public void DeleteCharacter(Entity character)
+    {
+        string uid = character.Uid.ToString();
+        Campaign.Characters.Remove(character);
+        Campaign.CharacterChanged(uid);
+    }
+
+    
+    public Entity GetEntity(string uid)
+    {
+        Guid guid = new Guid(uid);
+        foreach (Entity entity in Campaign.Entities)
+        {
+            if (entity.Uid == guid)
+            {
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    public Entity GetCharacter(string uid)
+    {
+        Guid guid = new Guid(uid);
+        foreach (Entity entity in Campaign.Characters)
+        {
+            if (entity.Uid == guid)
+            {
+                return entity;
+            }
+        }
+        return null;
     }
 
     public Room InitializeRoom()
@@ -74,9 +142,23 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public void CreateRoom (int gridX, int gridY)
     {
         Room room = InitializeRoom();
+        room.X = gridX;
+        room.Y = gridY;
         Campaign.SetRoom(gridX, gridY, room);
         Campaign.ActiveRoom = room;
         Debug.Log("Creating new room");
+    }
+
+    public void MoveEntity(Entity entity, Vector4 position)
+    {
+        if (SessionManager.IsClient)
+        {
+            NetworkController.MoveCharacter(entity, position);
+        }
+        else
+        {
+            entity.Position = position;
+        }
     }
 
 	public void SetTerrain(Room room, int x, int y, Ground terrain)
@@ -127,5 +209,18 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public void CreateLink(Pair<int,int> room1, Pair<int,int> room2)
     {
         Campaign.AddLink(room1, room2);
+    }
+
+    float spacing = 0.75f;
+    public Vector3 GetPosition(int x, int y)
+    {
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+                            -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0) + gameObject.transform.position;
+    }
+
+    public Vector3 GetAbsPosition(int x, int y)
+    {
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+                            -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
     }
 }

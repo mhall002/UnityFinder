@@ -13,6 +13,9 @@ namespace Assets.Scripts.Models
         public static int Width = 26;
         public static int Height = 12;
 
+        public int X;
+        public int Y;
+
         private int roomID;
         public int RoomID
         {
@@ -61,17 +64,6 @@ namespace Assets.Scripts.Models
         public Room ()
         {
             TerrainGrid = new Ground[Width, Height];
-        }
-
-        public int getTotalXPWorth()
-        {
-            int total = XPWorth;
-            foreach (var entity in EntityGrid)
-            {
-                if (entity.Type == EntityType.NonPlayerCharacter)
-                    total += entity.XPWorth;
-            }
-            return total;
         }
 
         public void SetTerrain(int x, int y, Ground terrain)

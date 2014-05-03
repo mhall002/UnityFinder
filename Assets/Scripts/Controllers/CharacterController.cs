@@ -82,10 +82,36 @@ public class CharacterController : MonoBehaviour {
 		}
 	}
 
+    private static Dictionary<StatName, string> statNameToString = null;
+    public static Dictionary<StatName, string> StatNameToString
+    {
+        get
+        {
+            if (statTypeToNames == null)
+                InitStatNameToType();
+            return statNameToString;
+        }
+    }
+
 	private static void InitStatNameToType()
 	{
+        statNameToString = new Dictionary<StatName,string>();
 		statNameToType = new Dictionary<StatName, StatType>();
 		statTypeToNames = new Dictionary<StatType, List<StatName>>();
+
+        foreach (StatName stat in Enum.GetValues(typeof(StatName)))
+        {
+            StringBuilder builder = new StringBuilder(stat.ToString());
+            for(int i = 1; i < builder.Length; i++)
+            {
+                if (char.IsUpper(builder[i]))
+                {
+                    builder.Insert(i, ' ');
+                    i++;
+                }
+            }
+            statNameToString[stat] = builder.ToString();
+        }
 
 		statTypeToNames[StatType.AbilityScore] = new List<StatName>();
 		for(int i = 0; i < 6; i++)
@@ -135,6 +161,11 @@ public class CharacterController : MonoBehaviour {
 		return StatTypeToNames[type];
 	}
 
+    public string GetNameForStat(StatName name)
+    {
+        return StatNameToString[name];
+    }
+
 	// Use this for initialization
 	void Start () {
 	
@@ -147,7 +178,6 @@ public class CharacterController : MonoBehaviour {
 		character.Level = 0;
 		character.Height = 1;
 		character.Width = 1;
-		character.XPWorth = 0;
 		foreach (StatName statName in Enum.GetValues(typeof(StatName)))
 		{
 			character.SetStat(statName, 0);

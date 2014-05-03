@@ -2,12 +2,15 @@
 using System.Collections;
 using Assets.Scripts.Models;
 using System.Collections.Generic;
+using System;
 
 public class RemoteView : MonoBehaviour {
     public CampaignController CampaignController;
     public TerrainStorage TerrainStorage;
     public NetworkController NetworkController;
+    public SessionManager SessionManager;
     private Campaign campaign;
+    
 
     public Campaign Campaign
     {
@@ -47,8 +50,8 @@ public class RemoteView : MonoBehaviour {
             string[] indexes = property.Split('[')[1].Split(',');
             int x1 = int.Parse(indexes[0]);
             int y1 = int.Parse(indexes[1]);
-            int x2 = int.Parse(indexes[3]);
-            int y2 = int.Parse(indexes[4].Substring(0, indexes[1].IndexOf(']')));
+            int x2 = int.Parse(indexes[2]);
+            int y2 = int.Parse(indexes[3].Substring(0, indexes[1].IndexOf(']')));
             AddLink(x1, y1, x2, y2);
         }
         if (e.PropertyName.StartsWith("RemoveLink"))
@@ -61,7 +64,28 @@ public class RemoteView : MonoBehaviour {
             int y2 = int.Parse(indexes[4].Substring(0, indexes[1].IndexOf(']')));
             RemoveLink(x1, y1, x2, y2);
         }
-
+        if (e.PropertyName.StartsWith("Characters"))
+        {
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(']');
+            string uid = indexes[0];
+            Entity entity = CampaignController.GetCharacter(uid);
+            if (entity != null)
+                SendCharacter(entity);
+            else
+                DeleteCharacter(uid);
+        }
+        if (e.PropertyName.StartsWith("Entities"))
+        {
+            string property = e.PropertyName;
+            string[] indexes = property.Split('[')[1].Split(']');
+            string uid = indexes[0];
+            Entity entity = CampaignController.GetEntity(uid);
+            if (entity != null)
+                SendEntity(entity);
+            else
+                DeleteEntity(uid);
+        }
     }
 
     void room_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -96,7 +120,44 @@ public class RemoteView : MonoBehaviour {
                 DeleteRoom(x, y);
             }
         }
+    }
 
+    void character_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        Entity entity = (Entity) sender;
+        if (e.PropertyName == "Position")
+        {
+            MoveEntity(entity);
+        }
+    }
+
+    [RPC]
+    void MoveCharacter(string uid, float roomx, float roomy, float tilex, float tiley, NetworkMessageInfo info)
+    {
+        Guid guid = new Guid(uid);
+        Vector4 position = new Vector4(roomx, roomy, tilex, tiley);
+        foreach (Entity character in Campaign.Characters)
+        {
+            if (character.Uid == guid)
+            {
+                if (character.Owner == SessionManager.GetPlayerName(info.sender))
+                    character.Position = position;
+                else
+                    character.Position = character.Position; // causes resend to stupid client
+                break;
+            }
+        }
+    }
+
+    [RPC]
+    void CreateClientCharacter(string name, string image, NetworkMessageInfo info)
+    {
+        Debug.Log("Creating client char");
+        Entity entity = new Entity();
+        entity.Name = name;
+        entity.Image = image;
+        entity.Owner = SessionManager.GetPlayerName(info.sender);
+        CampaignController.AddCharacter(entity);
     }
 
     void SendAll()
@@ -116,8 +177,59 @@ public class RemoteView : MonoBehaviour {
             NetworkController.networkView.RPC("CreateCampaign", RPCMode.OthersBuffered, Campaign.Name);
             SendRooms();
             SendLinks();
+            SendCharacters();
+            SendEntities();
             Debug.Log("Sent Campaign!");
         }
+    }
+
+    void SendEntities()
+    {
+        foreach (Entity entity in campaign.Entities)
+        {
+            SendEntity(entity);
+        }
+    }
+
+    void SendCharacters()
+    {
+        foreach(Entity character in campaign.Characters)
+        {
+            SendCharacter(character);
+        }
+    }
+
+    void SendCharacter(Entity character)
+    {
+        Debug.Log("Sending character");
+        NetworkController.networkView.RPC("CreateCharacter", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Owner,
+            character.Position.x, character.Position.y, character.Position.z, character.Position.w);
+        character.PropertyChanged += character_PropertyChanged;
+    }
+
+    void SendEntity(Entity character)
+    {
+        Debug.Log("Sending entity");
+        NetworkController.networkView.RPC("CreateEntity", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Owner,
+            character.Position.x, character.Position.y, character.Position.z, character.Position.w);
+        character.PropertyChanged += character_PropertyChanged;
+    }
+
+    void MoveEntity(Entity entity)
+    {
+        Debug.Log("Sending Move");
+        NetworkController.networkView.RPC("MoveEntity", RPCMode.OthersBuffered, entity.Uid.ToString(), entity.Position.x, entity.Position.y, entity.Position.z, entity.Position.w);
+    }
+
+    void DeleteCharacter(string uid)
+    {
+        NetworkController.networkView.RPC("DeleteCharacter", RPCMode.OthersBuffered, uid);
+    }
+
+    void DeleteEntity(string uid)
+    {
+        Debug.Log("Deleting entity");
+        NetworkController.networkView.RPC("DeleteEntity", RPCMode.OthersBuffered, uid);
     }
 
     void SendTerrains()
@@ -216,7 +328,7 @@ public class RemoteView : MonoBehaviour {
     {
         Campaign = CampaignController.Campaign;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
 	

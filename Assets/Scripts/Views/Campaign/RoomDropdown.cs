@@ -7,7 +7,8 @@ public class RoomDropdown : MonoBehaviour {
     public SessionManager SessionManager;
     public CampaignController CampaignController;
     public ViewController ViewController;
-	public MapGrid MapGrid; 
+	public MapGrid MapGrid;
+    public GameObject BoardCamera;
 
     public bool Displayed = false;
     public Vector2 Position;
@@ -44,7 +45,7 @@ public class RoomDropdown : MonoBehaviour {
                     {
                         CampaignController.SetRoom(GridX, GridY);
                         Debug.Log("Set room to " + GridX + " : " + GridY);
-						MapGrid.SetPosition(GridX, GridY);
+                        BoardCamera.transform.position = MapGrid.GetAbsPosition(GridX, GridY) + new Vector3(0,0,BoardCamera.transform.position.z);
                         ViewController.State = global::ViewController.ViewState.Room;
                     }
                     if (GUILayout.Button(room.Visible ? "Hide" : "Show"))
@@ -66,7 +67,7 @@ public class RoomDropdown : MonoBehaviour {
                 {
 					CampaignController.SetRoom(GridX, GridY);
 					Debug.Log("Set room to " + GridX + " : " + GridY);
-					MapGrid.SetPosition(GridX, GridY);
+                    BoardCamera.transform.position = MapGrid.GetAbsPosition(GridX, GridY) + new Vector3(0, 0, BoardCamera.transform.position.z);
 					ViewController.State = global::ViewController.ViewState.Room;
                 }
                 GUILayout.EndArea();

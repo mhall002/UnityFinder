@@ -1,11 +1,52 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Assets.Scripts.Models;
+using System.ComponentModel;
 
 public class MapGrid : MonoBehaviour {
 
+    public event PropertyChangedEventHandler PropertyChanged;
+    public SessionManager SessionManager;
 	public CampaignController CampaignController;
 	public GameObject TileGridPrefab;
+    public GameObject PingPrefab;
+    public Camera RoomCamera;
+
+    private Vector4? mouseOverPosition;
+    public Vector4? MouseOverPosition
+    {
+        get
+        {
+            return mouseOverPosition;
+        }
+        private set
+        {
+            mouseOverPosition = value;
+            OnPropertyChanged("MouseOverPosition");
+        }
+    }
+
+    private Entity selectedEntity;
+    public Entity SelectedEntity
+    {
+        get
+        {
+            return selectedEntity;
+        }
+        set
+        {
+            if (selectedEntity != null)
+            {
+                if (CloneSelected)
+                    CampaignController.DeleteEntity(selectedEntity);
+                else
+                    selectedEntity.Position = selectedEntity.Position;
+            }
+            selectedEntity = value;
+        }
+    }
+
+    public 
 	TileGrid[,] Map = new TileGrid[Campaign.Width, Campaign.Height];
 
 	Campaign campaign;
@@ -28,6 +69,80 @@ public class MapGrid : MonoBehaviour {
 		}
 	}
 
+    [RPC]
+    public void CreatePing(Vector3 position, NetworkMessageInfo info)
+    {
+        GameObject go = Instantiate(PingPrefab, position, Quaternion.identity) as GameObject;
+        go.transform.parent = transform;
+        (go.GetComponent("SpriteRenderer") as SpriteRenderer).color = SessionManager.GetColour(SessionManager.GetPlayerName(info.sender));
+    }
+
+    public void SendPing(Vector3 position)
+    {
+        position.z = 2;
+        if (SessionManager.Active)
+            networkView.RPC("CreatePing", RPCMode.All, position);
+        else
+        {
+            GameObject go = Instantiate(PingPrefab, position, Quaternion.identity) as GameObject;
+            go.transform.parent = transform;
+        }
+    }
+
+
+
+    public void GotMouseDown(Vector4 position)
+    {
+        if (SelectedEntity != null)
+        {
+            if (!CampaignController.IsClient || CampaignController.Username == SelectedEntity.Owner)
+            {
+                CampaignController.MoveEntity(selectedEntity, position);
+            }
+            selectedEntity = null;
+            CloneSelected = false;
+        }
+        else
+        {
+            foreach (Entity character in campaign.Characters)
+            {
+                if (character.Position == position)
+                {
+                    SelectedEntity = character;
+                }
+            }
+
+            foreach (Entity entity in campaign.Entities)
+            {
+                if (entity.Position == position)
+                {
+                    SelectedEntity = entity;
+                }
+            }
+        }
+        
+    }
+
+    public void GotMouseOver(Vector4 position)
+    {
+        MouseOverPosition = position;
+    }
+
+    public void LostMouseOver(Vector4 position)
+    {
+        if (MouseOverPosition != null && position.Equals(MouseOverPosition.Value))
+        {
+            MouseOverPosition = null;
+        }
+    }
+
+    bool CloneSelected = false;
+    public void SelectClone(Entity clone)
+    {
+        Entity entity = CampaignController.CreateClone(clone);
+        selectedEntity = entity;
+    }
+
 	void Campaign_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 	{
 		if (e.PropertyName.StartsWith("Rooms"))
@@ -42,22 +157,23 @@ public class MapGrid : MonoBehaviour {
 		}
 	}
 
-	float spacing = 0.75f;
-	Vector3 GetPosition(int x, int y)
-	{
-		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
-		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0) + gameObject.transform.position;
-	}
-
-	Vector3 GetAbsPosition(int x, int y)
+	static float spacing = 0.75f;
+	public static Vector3 GetPosition(int x, int y)
 	{
 		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
 		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
 	}
 
-	public void SetPosition(int x, int y)
+    public static Vector3 GetPosition(Vector4 position)
+    {
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * position.x - 10.2f - 9.5f,
+                            -Room.Height / 2 + (Room.Height * spacing) * position.y - 4.6f - 4.2f, 0) + new Vector3(spacing * position.z, spacing * position.w);
+    }
+
+	public Vector3 GetAbsPosition(int x, int y)
 	{
-		this.transform.position = -GetAbsPosition(x, y);
+		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
 	}
 
 	void UpdateAll()
@@ -114,6 +230,34 @@ public class MapGrid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    if (Input.GetKeyDown("x"))
+        {
+            if (selectedEntity != null)
+            {
+                if (Campaign.Characters.Contains(selectedEntity) && !CampaignController.IsClient)
+                {
+                    CampaignController.DeleteCharacter(selectedEntity);
+                }
+                if (Campaign.Entities.Contains(selectedEntity))
+                {
+                    CampaignController.DeleteEntity(selectedEntity);
+                }
+                SelectedEntity = null;
+            }
+        }
+
+        if (Input.GetKeyDown("q"))
+        {
+            SendPing(RoomCamera.ScreenToWorldPoint(Input.mousePosition));
+        }
 	}
+
+    protected void OnPropertyChanged(string name)
+    {
+        PropertyChangedEventHandler handler = PropertyChanged;
+        if (handler != null)
+        {
+            handler(this, new PropertyChangedEventArgs(name));
+        }
+    }
 }

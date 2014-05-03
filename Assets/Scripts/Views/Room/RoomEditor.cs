@@ -5,16 +5,22 @@ using Assets.Scripts.Models;
 
 public class RoomEditor : MonoBehaviour {
 
+    public EntityStorage EntityStorage;
     public TerrainStorage TerrainStorage;
     public SpriteStorage SpriteStorage;
+    public MapGrid MapGrid;
+    public CampaignController CampaignController;
 
     ICollection<Ground> Terrains;
+    ICollection<Entity> Entities;
+    int EntityCount = 0;
 
     public Ground SelectedTerrain = null;
 
 	// Use this for initialization
 	void Start () {
         Terrains = TerrainStorage.GetTerrains();
+        Entities = EntityStorage.GetEntities();
 	}
 	
 
@@ -34,6 +40,18 @@ public class RoomEditor : MonoBehaviour {
             }
         }
         GUILayout.EndHorizontal();
+
+        GUILayout.Label("Entities:");
+        GUILayout.BeginHorizontal("box");
+        foreach (Entity entity in Entities)
+        {
+            if (GUILayout.Button(SpriteStorage.GetTexture(entity.Image), GUILayout.Width(30), GUILayout.Height(30)))
+            {
+                MapGrid.SelectClone(entity);
+            }
+        }
+        GUILayout.EndHorizontal();
+
         GUILayout.EndVertical();
         GUILayout.EndArea();
     }
