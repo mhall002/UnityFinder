@@ -210,7 +210,7 @@ public class RemoteView : MonoBehaviour {
     void SendEntity(Entity character)
     {
         Debug.Log("Sending entity");
-        NetworkController.networkView.RPC("CreateEntity", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Owner,
+        NetworkController.networkView.RPC("CreateEntity", RPCMode.OthersBuffered, character.Uid.ToString(), character.Name, character.Description, character.Image, character.Width, character.Height, character.Owner,
             character.Position.x, character.Position.y, character.Position.z, character.Position.w);
         character.PropertyChanged += character_PropertyChanged;
     }
