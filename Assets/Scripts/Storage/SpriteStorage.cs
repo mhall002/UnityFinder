@@ -11,6 +11,12 @@ public class SpriteStorage : MonoBehaviour {
         "Characters/knight",
         "Characters/MaleElfRogue",
     };
+    public static string[] NPCSprites = 
+    {
+        "Creatures/GoblinMage",
+        "Creatures/GoblinWarrior",
+        "Creatures/GoblinWarrior2",
+    };
 	// Use this for initialization
 	void Start () {
 	

@@ -22,7 +22,26 @@ public class MapGrid : MonoBehaviour {
         private set
         {
             mouseOverPosition = value;
+            Entity entity = null;
+            if (value != null)
+                entity = GetEntity(value.Value);
+            if (entity != MouseOverEntity)
+                MouseOverEntity = entity;
             OnPropertyChanged("MouseOverPosition");
+        }
+    }
+
+    private Entity mouseOverEntity;
+    public Entity MouseOverEntity
+    {
+        get
+        {
+            return mouseOverEntity;
+        }
+        private set
+        {
+            mouseOverEntity = value;
+            OnPropertyChanged("MouseOverEntity");
         }
     }
 
@@ -89,7 +108,25 @@ public class MapGrid : MonoBehaviour {
         }
     }
 
+    public Entity GetEntity(Vector4 position)
+    {
+        foreach (Entity character in campaign.Characters)
+        {
+            if (character.Position == position)
+            {
+                return character;
+            }
+        }
 
+        foreach (Entity entity in campaign.Entities)
+        {
+            if (entity.Position == position)
+            {
+                return entity;
+            }
+        }
+        return null;
+    }
 
     public void GotMouseDown(Vector4 position)
     {
@@ -189,6 +226,18 @@ public class MapGrid : MonoBehaviour {
 			}
 		}
 	}
+
+    public void CharacterFocus(Entity entity)
+    {
+        if (entity.Position.x < 0) // Hasnt been placed yet
+        {
+            SelectedEntity = entity;
+        }
+        else
+        {
+            RoomCamera.transform.position = GetPosition(entity.Position) + new Vector3(0,0,-10);
+        }
+    }
 
 	void UpdateRoom (int x, int y)
 	{

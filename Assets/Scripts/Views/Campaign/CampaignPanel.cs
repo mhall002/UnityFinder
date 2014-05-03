@@ -345,7 +345,7 @@ public class CampaignPanel : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUILayout.BeginArea(new Rect(0,0,120,400));
+		GUILayout.BeginArea(new Rect(0,0,180,400));
 
 		if (GUILayout.Button ("Create Character"))
 		{

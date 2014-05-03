@@ -9,8 +9,22 @@ public class MainMenuGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
+
+    public string GetPrefUsername()
+    {
+        if (PlayerPrefs.HasKey("username"))
+        {
+            return PlayerPrefs.GetString("username");
+        }
+        return "Player" + Random.Range(0,200);
+    }
+
+    public void SetPrefUsername(string name)
+    {
+        PlayerPrefs.SetString("username", name);
+    }
 
     string Username = "Player";
     string[] Servers = null;
@@ -27,6 +41,7 @@ public class MainMenuGUI : MonoBehaviour {
         }
         if (GUI.Button(new Rect(20,40,80,20), "Join"))
         {
+            Username = GetPrefUsername();
             SessionManager.StartServerLookup();
             WaitingForServers = true;
         }
@@ -63,6 +78,7 @@ public class MainMenuGUI : MonoBehaviour {
             {
                 if (GUI.Button(new Rect(130,70 + i*30,180,20), "Join"))
                 {
+                    SetPrefUsername(Username);
                     SessionManager.Connect(i, Username);
                     Controller.State = ViewController.ViewState.Campaign;
                 }

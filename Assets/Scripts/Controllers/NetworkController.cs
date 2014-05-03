@@ -66,6 +66,7 @@ public class NetworkController : MonoBehaviour {
         entity.Description = description;
         entity.Image = image;
         entity.Owner = owner;
+        entity.Type = EntityType.PlayerCharacter;
         entity.Position = new Vector4(roomx, roomy, tilex, tiley);
         if (!old)
         {
@@ -75,7 +76,7 @@ public class NetworkController : MonoBehaviour {
     }
 
     [RPC]
-    void CreateEntity(string uid, string name, string description, string image, string owner, float roomx, float roomy, float tilex, float tiley)
+    void CreateEntity(string uid, string name, string description, string image, int width, int height, string owner, float roomx, float roomy, float tilex, float tiley)
     {
         bool old = true;
         if (!idToEntity.ContainsKey(uid))
@@ -88,6 +89,9 @@ public class NetworkController : MonoBehaviour {
         entity.Description = description;
         entity.Image = image;
         entity.Owner = owner;
+        entity.Width = width;
+        entity.Height = height;
+        entity.Type = EntityType.NonPlayerCharacter;
         entity.Position = new Vector4(roomx, roomy, tilex, tiley);
         if (!old)
         {

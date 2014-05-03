@@ -30,7 +30,7 @@ public class CampaignEditorPanel : MonoBehaviour {
 
             x = Screen.width - 120;
             y = 10;
-            GUI.Box(new Rect(x, 0, 120, 200), "Campaign Editor");
+            GUI.Box(new Rect(x, 0, 120, 120), "Campaign Editor");
 
             if (GUI.Button(GetButtonRect(), "Host"))
             {
@@ -44,8 +44,6 @@ public class CampaignEditorPanel : MonoBehaviour {
             {
 
             }
-            GUI.Label(new Rect(x + 10, y + 10, buttonWidth - 10, 20), "Players:");
-
     }
 
 	// Update is called once per frame

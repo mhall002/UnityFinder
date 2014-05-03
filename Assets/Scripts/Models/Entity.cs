@@ -12,12 +12,90 @@ namespace Assets.Scripts.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Guid Uid;
-        public string Name = "Bob";
-        public string Description = "";
+        private string name = "Bob";
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+                OnPropertyChanged("Name");
+            }
+        }
+        private string description = "";
+        public string Description
+        {
+            get
+            {
+                return description;
+            }
+            set
+            {
+                description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+
+        private string gmDescription = "";
+        public string GMDescription
+        {
+            get
+            {
+                return gmDescription;
+            }
+            set
+            {
+                gmDescription = value;
+                OnPropertyChanged("GMDescription");
+            }
+        }
+
         public bool Visible = true;
-        public string Image = "Characters/knight";
-        public int Height = 1;
-        public int Width = 1;
+
+        private string image = "Characters/knight";
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                image = value;
+                OnPropertyChanged("Image");
+            }
+        }
+        private int height = 1;
+        public int Height
+        {
+            get
+            {
+                return height;
+            }
+            set
+            {
+                height = value;
+                OnPropertyChanged("Height");
+            }
+        }
+        private int width = 1;
+        public int Width
+        {
+            get
+            {
+                return width;
+            }
+            set
+            {
+                width = value;
+                OnPropertyChanged("Width");
+            }
+        }
+
+
         public EntityType Type;
 
         public Entity(Guid uid)
@@ -35,13 +113,26 @@ namespace Assets.Scripts.Models
             Entity clone = new Entity();
             clone.Name = entity.Name;
             clone.Description = entity.Description;
+            Debug.Log("Description: " + clone.Description);
+            clone.GMDescription = entity.GMDescription;
             clone.Image = entity.Image;
             clone.Height = entity.Height;
             clone.Width = entity.Width;
             return clone;
         }
 
-        private Vector4 position;
+        public void SaveAs(Entity entity)
+        {
+            name = entity.Name;
+            description = entity.Description;
+            gmDescription = entity.GMDescription;
+            image = entity.Image;
+            height = entity.Height;
+            width = entity.Width;
+            OnPropertyChanged("All");
+        }
+
+        private Vector4 position = new Vector4(-1,-1,-1,-1);
         public Vector4 Position
         {
             get

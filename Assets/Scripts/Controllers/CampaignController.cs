@@ -47,6 +47,7 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         if (!IsClient)
         {
             Debug.Log("Adding character");
+            character.Type = EntityType.PlayerCharacter;
             Campaign.Characters.Add(character);
             Campaign.CharacterChanged(character.Uid.ToString());
         }
@@ -59,6 +60,7 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public Entity CreateClone(Entity entity)
     {
         Entity clone = Entity.Clone(entity);
+        clone.Type = EntityType.PlayerCharacter;
         Campaign.Entities.Add(clone);
         Campaign.EntityChanged(clone.Uid.ToString());
         return clone;
@@ -104,6 +106,21 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
             }
         }
         return null;
+    }
+
+    public Entity GetTempCopy(Entity entity)
+    {
+        Entity clone = Entity.Clone(entity);
+        clone.Uid = entity.Uid;
+        return clone;
+    }
+
+    public void SaveTempEntity(Entity entity)
+    {
+        Entity original = GetEntity(entity.Uid.ToString());
+        if (original == null)
+            original = GetCharacter(entity.Uid.ToString());
+        original.SaveAs(entity);
     }
 
     public Room InitializeRoom()

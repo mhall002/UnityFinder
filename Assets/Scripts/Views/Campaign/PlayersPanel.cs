@@ -46,7 +46,7 @@ public class PlayersPanel : MonoBehaviour {
     {
         if (SessionManager.Active)
         {
-            Rect position = new Rect(Screen.width - 200, 300, 200, 200);
+            Rect position = new Rect(Screen.width - 120, 125, 120, 150);
             GUI.Box(position, "");
             GUILayout.BeginArea(position);
             if (ColourChangeable)
