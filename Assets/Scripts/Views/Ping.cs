@@ -19,7 +19,7 @@ public class Ping : MonoBehaviour {
             DestroyObject(gameObject);
         }
 
-        float scale = UpperScale - (UpperScale - LowerScale) * ((Time.time - creationTime) - (int)(Time.time - creationTime));
+        float scale = UpperScale - (UpperScale - LowerScale) * ((Time.time - creationTime)*2 - (int)((Time.time - creationTime)*2));
         transform.localScale = new Vector3(scale, scale, 1);
 	}
 }

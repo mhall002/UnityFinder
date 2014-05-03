@@ -23,11 +23,6 @@ public class NetworkController : MonoBehaviour {
         }
     }
 
-    public void Connect(string username)
-    {
-        RemoteView.networkView.RPC("Connect", RPCMode.Server, username);
-    }
-
     public void MoveCharacter(Entity entity, Vector4 position)
     {
         Debug.Log("Moving character over network...");

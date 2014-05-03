@@ -70,10 +70,11 @@ public class MapGrid : MonoBehaviour {
 	}
 
     [RPC]
-    public void CreatePing(Vector3 position)
+    public void CreatePing(Vector3 position, NetworkMessageInfo info)
     {
         GameObject go = Instantiate(PingPrefab, position, Quaternion.identity) as GameObject;
         go.transform.parent = transform;
+        (go.GetComponent("SpriteRenderer") as SpriteRenderer).color = SessionManager.GetColour(SessionManager.GetPlayerName(info.sender));
     }
 
     public void SendPing(Vector3 position)
@@ -82,7 +83,10 @@ public class MapGrid : MonoBehaviour {
         if (SessionManager.Active)
             networkView.RPC("CreatePing", RPCMode.All, position);
         else
-            CreatePing(position);
+        {
+            GameObject go = Instantiate(PingPrefab, position, Quaternion.identity) as GameObject;
+            go.transform.parent = transform;
+        }
     }
 
 

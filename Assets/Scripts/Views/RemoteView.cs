@@ -8,8 +8,9 @@ public class RemoteView : MonoBehaviour {
     public CampaignController CampaignController;
     public TerrainStorage TerrainStorage;
     public NetworkController NetworkController;
+    public SessionManager SessionManager;
     private Campaign campaign;
-    private Dictionary<string, string> PlayerToName = new Dictionary<string, string>();
+    
 
     public Campaign Campaign
     {
@@ -131,13 +132,6 @@ public class RemoteView : MonoBehaviour {
     }
 
     [RPC]
-    void Connect(string userName, NetworkMessageInfo info)
-    {
-        Debug.Log("Connected " + info.sender.ToString());
-        PlayerToName[info.sender.ToString()] = userName;
-    }
-
-    [RPC]
     void MoveCharacter(string uid, float roomx, float roomy, float tilex, float tiley, NetworkMessageInfo info)
     {
         Guid guid = new Guid(uid);
@@ -146,7 +140,7 @@ public class RemoteView : MonoBehaviour {
         {
             if (character.Uid == guid)
             {
-                if (character.Owner == PlayerToName[info.sender.ToString()])
+                if (character.Owner == SessionManager.GetPlayerName(info.sender))
                     character.Position = position;
                 else
                     character.Position = character.Position; // causes resend to stupid client
@@ -162,7 +156,7 @@ public class RemoteView : MonoBehaviour {
         Entity entity = new Entity();
         entity.Name = name;
         entity.Image = image;
-        entity.Owner = PlayerToName[info.sender.ToString()];
+        entity.Owner = SessionManager.GetPlayerName(info.sender);
         CampaignController.AddCharacter(entity);
     }
 
@@ -334,7 +328,7 @@ public class RemoteView : MonoBehaviour {
     {
         Campaign = CampaignController.Campaign;
     }
-	
+
 	// Update is called once per frame
 	void Update () {
 	
