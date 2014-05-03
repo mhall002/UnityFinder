@@ -298,7 +298,10 @@ public class CampaignPanel : MonoBehaviour {
     void CreateSimpleCharacterWindow(int windowID)
     {
         if (CreatingCharacter == null)
+        {
             CreatingCharacter = new Entity();
+            CreatingCharacter.Owner = CampaignController.Username;
+        }
 
         Rect current = new Rect(10, 50, 300, 50);
         Rect Icon = new Rect(10, 10, 75, 75);

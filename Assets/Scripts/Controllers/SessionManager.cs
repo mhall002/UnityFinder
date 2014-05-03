@@ -12,7 +12,7 @@ public class SessionManager : MonoBehaviour {
 
     public RemoteView RemoteView;
     public NetworkController NetworkController;
-    public string UserName;
+    public string UserName = "GM";
 
     private Dictionary<string, string> PlayerToName = new Dictionary<string, string>();
     private Dictionary<string, Color> NameToColour = new Dictionary<string, Color>();
@@ -139,7 +139,9 @@ public class SessionManager : MonoBehaviour {
 
     public Color GetColour(string name)
     {
-        return NameToColour[name];
+        if (NameToColour.ContainsKey(name))
+            return NameToColour[name];
+        return new Color(0, 0, 0);
     }
 
     public ICollection<string> GetPlayers()

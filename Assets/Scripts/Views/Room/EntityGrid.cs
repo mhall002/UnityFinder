@@ -5,11 +5,12 @@ using System.Collections.Generic;
 
 public class EntityGrid : MonoBehaviour {
 
-    public GameObject EntityMarker;
+    public GameObject EntityIcon;
     public CampaignController CampaignController;
     public GameStatePanel GameStatePanel;
     public EntityMarker MouseOverEntityMarker;
     public MapGrid MapGrid;
+    public SessionManager SessionManager;
 
     Campaign campaign;
     public Campaign Campaign
@@ -57,7 +58,7 @@ public class EntityGrid : MonoBehaviour {
         {
             if (!EntityMarkers.ContainsKey(entity))
             {
-                EntityMarker marker = (Instantiate(EntityMarker, MapGrid.GetPosition(entity.Position), Quaternion.identity) as GameObject).GetComponent("EntityMarker") as EntityMarker;
+                EntityMarker marker = (Instantiate(EntityIcon, MapGrid.GetPosition(entity.Position), Quaternion.identity) as GameObject).GetComponentInChildren(typeof(EntityMarker)) as EntityMarker;
                 marker.Entity = entity;
                 marker.transform.parent = transform;
                 EntityMarkers[entity] = marker;
@@ -67,10 +68,11 @@ public class EntityGrid : MonoBehaviour {
         {
             if (!EntityMarkers.ContainsKey(entity))
             {
-                EntityMarker marker = (Instantiate(EntityMarker, MapGrid.GetPosition(entity.Position), Quaternion.identity) as GameObject).GetComponent("EntityMarker") as EntityMarker;
+                EntityMarker marker = (Instantiate(EntityIcon, MapGrid.GetPosition(entity.Position), Quaternion.identity) as GameObject).GetComponentInChildren(typeof(EntityMarker)) as EntityMarker;
                 marker.Entity = entity;
                 marker.transform.parent = transform;
                 EntityMarkers[entity] = marker;
+                EntityMarkers[entity].BackColour = SessionManager.GetColour(entity.Owner);
             }
         }
         List<Entity> marked = new List<Entity>();
@@ -93,7 +95,21 @@ public class EntityGrid : MonoBehaviour {
         Campaign = CampaignController.Campaign;
         CampaignController.PropertyChanged += CampaignController_PropertyChanged;
         MapGrid.PropertyChanged += MapGrid_PropertyChanged;
+        SessionManager.PropertyChanged += SessionManager_PropertyChanged;
 	}
+
+    void SessionManager_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        ApplyColours();
+    }
+
+    void ApplyColours()
+    {
+        foreach (Entity character in Campaign.Characters)
+        {
+            EntityMarkers[character].BackColour = SessionManager.GetColour(character.Owner);
+        }
+    }
 
     void MapGrid_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
