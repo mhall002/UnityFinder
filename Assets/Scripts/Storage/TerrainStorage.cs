@@ -2,6 +2,8 @@
 using System.Collections;
 using Assets.Scripts.Models;
 using System.Collections.Generic;
+using AssemblyCSharp;
+using Mono.Data.SqliteClient;
 
 public class TerrainStorage : MonoBehaviour {
     public SessionManager SessionManager;
@@ -20,35 +22,25 @@ public class TerrainStorage : MonoBehaviour {
     {
         if (!SessionManager.IsClient)
         {
-            Ground NormalTerrain = new Ground()
-            {
-                Name = "Normal",
-                TypeID = 1,
-                TextureFile = "Tiles/NormalTile",
-                States = new List<State>(),
-                CharacterCode = 'a'
-            };
-            Terrains.Add("Normal", NormalTerrain);
-            CTerrains.Add('a', NormalTerrain);
 
-            Ground BlockedTerrain = new Ground()
+            var terrainSQL = "SELECT * from Terrain;";
+            SqliteConnection connection = Database.getDBConnection();
+            var terrainReader = Database.runSelectQuery(connection, new SqliteCommand(terrainSQL, connection));
+            while (terrainReader.Read())
             {
-                Name = "Inaccessible",
-                TypeID = 1,
-                TextureFile = "Tiles/BlackTile",
-                States = new List<State>(),
-                CharacterCode = 'b'
-            };
-            BlockedTerrain.States.Add(new State()
-            {
-                Name = "Inaccessible",
-                Description = "You cannot move here"
-            });
-            Terrains.Add("Inaccessible", BlockedTerrain);
-            CTerrains.Add('b', NormalTerrain);
+                Ground currentItem = new Ground()
+                {
+                    Name = terrainReader.GetValue(4).ToString(),
+                    TypeID = int.Parse(terrainReader.GetValue(5).ToString()),
+                    TextureFile = terrainReader.GetValue(3).ToString(),
+                    CharacterCode = terrainReader.GetValue(2).ToString()[0]
+                };
+                Terrains.Add(currentItem.Name, currentItem);
+                CTerrains.Add(currentItem.CharacterCode, currentItem);
+            }
+
+            Loaded = true;
         }
-
-        Loaded = true;
     }
 
     public void AddTerrain(Ground terrain)
