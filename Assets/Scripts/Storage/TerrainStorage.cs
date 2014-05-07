@@ -7,16 +7,29 @@ using Mono.Data.SqliteClient;
 
 public class TerrainStorage : MonoBehaviour {
     public SessionManager SessionManager;
+    public SpriteStorage SpriteStorage;
     public NetworkController NetworkController;
     Dictionary<string, Ground> Terrains = new Dictionary<string, Ground>();
     Dictionary<char, Ground> CTerrains = new Dictionary<char, Ground>();
     bool Loaded = false;
+    Dictionary<string, Ground> TerrainsByImage = new Dictionary<string, Ground>();
 
 	// Use this for initialization
 	void Start () {
 	
 	}
 	
+    char currentChar = 'a';
+
+    public char GetNextChar()
+    {
+        while (CTerrains.ContainsKey(currentChar))
+        {
+            currentChar++;
+        }
+        return currentChar;
+    }
+
     // Populate from DB, for now just hard coded
     void LoadTerrains()
     {
@@ -37,8 +50,27 @@ public class TerrainStorage : MonoBehaviour {
                 };
                 Terrains.Add(currentItem.Name, currentItem);
                 CTerrains.Add(currentItem.CharacterCode, currentItem);
+                TerrainsByImage.Add(currentItem.TextureFile, currentItem);
             }
 
+            foreach (string name in SpriteStorage.TileSprites)
+            {
+                if (!TerrainsByImage.ContainsKey(name))
+                {
+                    Ground currentItem = new Ground()
+                    {
+                        Name = name,
+                        TypeID = 3,
+                        TextureFile = name,
+                        CharacterCode = GetNextChar()
+                    };
+                    Terrains.Add(currentItem.Name, currentItem);
+                    CTerrains.Add(currentItem.CharacterCode, currentItem);
+                    TerrainsByImage.Add(currentItem.TextureFile, currentItem);
+                }
+
+                
+            }
             Loaded = true;
         }
     }

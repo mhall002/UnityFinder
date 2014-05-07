@@ -6,6 +6,7 @@ public class SpriteStorage : MonoBehaviour {
 
     public string CharacterSpriteDirectory;
     public string EntitySpriteDirectory;
+    public string TileSpriteDirectory;
 
     public List<string> SpriteDirectories;
     public List<string> TextureDirectories;
@@ -15,6 +16,7 @@ public class SpriteStorage : MonoBehaviour {
 
     public List<string> CharacterSprites;
     public List<string> NPCSprites;
+    public List<string> TileSprites;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +37,12 @@ public class SpriteStorage : MonoBehaviour {
         foreach (Sprite sprite in sprites)
         {
             NPCSprites.Add(sprite.name);
+            Sprites.Add(sprite.name, sprite);
+        }
+        sprites = Resources.LoadAll<Sprite>(TileSpriteDirectory);
+        foreach (Sprite sprite in sprites)
+        {
+            TileSprites.Add(sprite.name);
             Sprites.Add(sprite.name, sprite);
         }
 

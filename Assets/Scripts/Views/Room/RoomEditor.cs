@@ -34,8 +34,15 @@ public class RoomEditor : MonoBehaviour {
         GUILayout.Button("Set as active room");
         GUILayout.Label("Terrains:");
         GUILayout.BeginHorizontal("box");
+        int counter = 0;
         foreach (Ground terrain in Terrains)
         {
+            if (counter++ > 3)
+            {
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                counter = 1;
+            }
             if (GUILayout.Button(SpriteStorage.GetTexture(terrain.TextureFile), GUILayout.Width(30), GUILayout.Height(30)))
             {
                 SelectedTerrain = terrain;
@@ -44,8 +51,8 @@ public class RoomEditor : MonoBehaviour {
         GUILayout.EndHorizontal();
 
         GUILayout.Label("Entities:");
-        GUILayout.BeginHorizontal("box");
-        int counter = 0;
+        GUILayout.BeginHorizontal();
+        counter = 0;
         foreach (Entity entity in Entities)
         {
             if (counter++ > 3)
