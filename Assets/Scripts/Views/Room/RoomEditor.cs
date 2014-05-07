@@ -45,8 +45,15 @@ public class RoomEditor : MonoBehaviour {
 
         GUILayout.Label("Entities:");
         GUILayout.BeginHorizontal("box");
+        int counter = 0;
         foreach (Entity entity in Entities)
         {
+            if (counter++ > 3)
+            {
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                counter = 1;
+            }
             if (GUILayout.Button(SpriteStorage.GetTexture(entity.Image), GUILayout.Width(30), GUILayout.Height(30)))
             {
                 MapGrid.SelectClone(entity);
@@ -167,8 +174,8 @@ public class RoomEditor : MonoBehaviour {
         {
             if (CharacterTextures == null)
             {
-                CharacterTextures = new Texture[SpriteStorage.CharacterSprites.Length];
-                for (int i = 0; i < SpriteStorage.CharacterSprites.Length; i++)
+                CharacterTextures = new Texture[SpriteStorage.CharacterSprites.Count];
+                for (int i = 0; i < SpriteStorage.CharacterSprites.Count; i++)
                 {
                     CharacterTextures[i] = SpriteStorage.GetTexture(SpriteStorage.CharacterSprites[i]);
                 }
@@ -179,10 +186,14 @@ public class RoomEditor : MonoBehaviour {
         {
             if (CreatureTextures == null)
             {
-                CreatureTextures = new Texture[SpriteStorage.NPCSprites.Length];
-                for (int i = 0; i < SpriteStorage.NPCSprites.Length; i++)
+                CreatureTextures = new Texture[SpriteStorage.CharacterSprites.Count + SpriteStorage.NPCSprites.Count];
+                for (int i = 0; i < SpriteStorage.NPCSprites.Count; i++)
                 {
                     CreatureTextures[i] = SpriteStorage.GetTexture(SpriteStorage.NPCSprites[i]);
+                }
+                for (int i = 0; i < SpriteStorage.CharacterSprites.Count; i++)
+                {
+                    CharacterTextures[i] = SpriteStorage.GetTexture(SpriteStorage.CharacterSprites[i]);
                 }
             }
             textures = CreatureTextures;

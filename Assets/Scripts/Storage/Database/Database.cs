@@ -14,7 +14,7 @@ namespace AssemblyCSharp
 {
 		public class Database
 		{
-		    public const string connectionString = "URI=file:/SQL/UnityFinder";
+		    public const string connectionString = "URI=file:C:/Users/Michael/Documents/GitHub/UnityFinder/SQLite/UnityFinder";
 				public Database ()
 				{
                     
@@ -51,7 +51,6 @@ namespace AssemblyCSharp
                 {
                     connection.Open();
                     var reader = command.ExecuteReader();
-
 
                     return reader;
                 }

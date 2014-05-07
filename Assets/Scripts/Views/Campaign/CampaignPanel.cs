@@ -231,8 +231,8 @@ public class CampaignPanel : MonoBehaviour {
 
         if (CharacterTextures == null)
         {
-            CharacterTextures = new Texture[SpriteStorage.CharacterSprites.Length];
-            for (int i = 0; i < SpriteStorage.CharacterSprites.Length; i++)
+            CharacterTextures = new Texture[SpriteStorage.CharacterSprites.Count];
+            for (int i = 0; i < SpriteStorage.CharacterSprites.Count; i++)
             {
                 CharacterTextures[i] = SpriteStorage.GetTexture(SpriteStorage.CharacterSprites[i]);
             }
@@ -252,7 +252,7 @@ public class CampaignPanel : MonoBehaviour {
 
         if (character.Image == null)
         {
-            character.Image = "Characters/knight";
+            character.Image = "knight";
         }
 
         if (GUI.Button(Icon, SpriteStorage.GetTexture(character.Image)))
@@ -308,7 +308,7 @@ public class CampaignPanel : MonoBehaviour {
 
         if (CreatingCharacter.Image == null)
         {
-            CreatingCharacter.Image = "Characters/knight";
+            CreatingCharacter.Image = "knight";
             CreatingCharacter.Name = "Joe";
         }
 

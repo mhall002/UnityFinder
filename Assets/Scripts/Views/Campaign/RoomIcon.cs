@@ -51,11 +51,11 @@ public class RoomIcon : MonoBehaviour {
         }
         if (room != null)
         {
-            (GetComponent("SpriteRenderer") as SpriteRenderer).sprite = SpriteStorage.GetSprite("Campaign/PopulatedRoom");
+            (GetComponent("SpriteRenderer") as SpriteRenderer).sprite = SpriteStorage.GetSprite("PopulatedRoom");
         }
         else
         {
-            (GetComponent("SpriteRenderer") as SpriteRenderer).sprite = SpriteStorage.GetSprite("Campaign/BlankRoom");
+            (GetComponent("SpriteRenderer") as SpriteRenderer).sprite = SpriteStorage.GetSprite("BlankRoom");
         }
         if (room == null || SessionManager.IsClient)
         {

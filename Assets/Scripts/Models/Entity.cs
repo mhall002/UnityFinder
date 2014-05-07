@@ -55,7 +55,7 @@ namespace Assets.Scripts.Models
 
         public bool Visible = true;
 
-        private string image = "Characters/knight";
+        private string image = "knight";
         public string Image
         {
             get

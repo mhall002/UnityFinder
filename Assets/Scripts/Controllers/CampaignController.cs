@@ -60,7 +60,7 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
     public Entity CreateClone(Entity entity)
     {
         Entity clone = Entity.Clone(entity);
-        clone.Type = EntityType.PlayerCharacter;
+        clone.Type = EntityType.NonPlayerCharacter;
         Campaign.Entities.Add(clone);
         Campaign.EntityChanged(clone.Uid.ToString());
         return clone;
@@ -128,11 +128,11 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Room room = new Room();
         if (NormalTerrain == null)
         {
-            NormalTerrain = TerrainStorage.GetTerrain("Normal");
+            NormalTerrain = TerrainStorage.GetTerrain("NormalTile");
         }
         if (BlockedTerrain == null)
         {
-            BlockedTerrain = TerrainStorage.GetTerrain("Inaccessible");
+            BlockedTerrain = TerrainStorage.GetTerrain("InaccessibleTile");
         }
 
         for (int y = 0; y < Room.Height; y++)

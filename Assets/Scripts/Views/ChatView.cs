@@ -25,27 +25,27 @@ public class ChatView : MonoBehaviour {
         GUILayout.BeginArea(new Rect(0, Screen.height - 300, 200, 300));
         GUILayout.BeginHorizontal();
         int size = 35;
-        if (GUILayout.Button(SpriteStorage.GetTexture("Dice/4die3"), GUILayout.Width(size), GUILayout.Height(size)))
+        if (GUILayout.Button(SpriteStorage.GetTexture("4die3"), GUILayout.Width(size), GUILayout.Height(size)))
         {
             SendRoll = true;
             Roll = 4;
         }
-        if(GUILayout.Button(SpriteStorage.GetTexture("Dice/6die2"), GUILayout.Width(size), GUILayout.Height(size)))
+        if(GUILayout.Button(SpriteStorage.GetTexture("6die2"), GUILayout.Width(size), GUILayout.Height(size)))
         {
             SendRoll = true;
             Roll = 6;
         }
-        if (GUILayout.Button(SpriteStorage.GetTexture("Dice/8die2"), GUILayout.Width(size), GUILayout.Height(size)))
+        if (GUILayout.Button(SpriteStorage.GetTexture("8die2"), GUILayout.Width(size), GUILayout.Height(size)))
         {
             SendRoll = true;
             Roll = 8;
         }
-        if (GUILayout.Button(SpriteStorage.GetTexture("Dice/10die2"), GUILayout.Width(size), GUILayout.Height(size)))
+        if (GUILayout.Button(SpriteStorage.GetTexture("10die2"), GUILayout.Width(size), GUILayout.Height(size)))
         {
             SendRoll = true;
             Roll = 10;
         }
-        if (GUILayout.Button(new GUIContent(SpriteStorage.GetTexture("Dice/20die2")), GUILayout.Width(size), GUILayout.Height(size)))
+        if (GUILayout.Button(SpriteStorage.GetTexture("20die2"), GUILayout.Width(size), GUILayout.Height(size)))
         {
             SendRoll = true;
             Roll = 20;

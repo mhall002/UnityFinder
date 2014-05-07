@@ -69,7 +69,7 @@ public class PlayersPanel : MonoBehaviour {
                 GUILayout.Label(Players[i]);
                 Color oldColour = GUI.color;
                 GUI.color = Colours[i];
-                if (GUILayout.Button(SpriteStorage.GetTexture("Campaign/BlankRoom"), GUILayout.Width(20), GUILayout.Height(20)))
+                if (GUILayout.Button(SpriteStorage.GetTexture("BlankRoom"), GUILayout.Width(20), GUILayout.Height(20)))
                 {
                     SessionManager.OverrideColour(Players[i]);
                 }

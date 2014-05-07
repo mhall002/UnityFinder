@@ -30,9 +30,9 @@ public class TerrainStorage : MonoBehaviour {
             {
                 Ground currentItem = new Ground()
                 {
-                    Name = terrainReader.GetValue(4).ToString(),
+                    Name = terrainReader.GetValue(3).ToString(),
                     TypeID = int.Parse(terrainReader.GetValue(5).ToString()),
-                    TextureFile = terrainReader.GetValue(3).ToString(),
+                    TextureFile = terrainReader.GetValue(4).ToString(),
                     CharacterCode = terrainReader.GetValue(2).ToString()[0]
                 };
                 Terrains.Add(currentItem.Name, currentItem);

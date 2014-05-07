@@ -24,10 +24,16 @@ create table Terrain(
 );
 
 insert into Terrain (Description, EntityCode, Name, TextureFilePath, TypeID)
-values ('It''s a mat!', 'a', 'Tiles/NormalTile', 'Normal', 1);
+values ('It''s a mat!', 'a', 'NormalTile', 'Normal', 1);
 
 insert into Terrain (Description, EntityCode, Name, TextureFilePath, TypeID)
-values ('It''s not a mat!', 'b', 'Tiles/BlackTile', 'Inaccessible', 1);
+values ('It''s not a mat!', 'b', 'BlackTile', 'Inaccessible', 1);
+
+insert into Terrain (Description, EntityCode, Name, TextureFilePath, TypeID)
+values ('It''s not a mat!', 'c', 'RailVertical', 'Normal2', 1);
+
+insert into Terrain (Description, EntityCode, Name, TextureFilePath, TypeID)
+values ('It''s not a mat!', 'd', 'RailHorizontal', 'Normal3', 1);
 
 create table Room(
 	ID integer NOT NULL primary key,

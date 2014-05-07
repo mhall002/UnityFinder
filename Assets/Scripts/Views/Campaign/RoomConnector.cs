@@ -46,13 +46,13 @@ public class RoomConnector : MonoBehaviour {
             SpriteStorage = (SpriteStorage)GameObject.Find("SpriteStorage").GetComponent("SpriteStorage");
             if (Vertical)
             {
-                NotEnabledSprite = SpriteStorage.GetSprite("Campaign/BlankConnectorVertical");
-                EnabledSprite = SpriteStorage.GetSprite("Campaign/FilledConnectorVertical");
+                NotEnabledSprite = SpriteStorage.GetSprite("BlankConnectorVertical");
+                EnabledSprite = SpriteStorage.GetSprite("FilledConnectorVertical");
             }
             else
             {
-                NotEnabledSprite = SpriteStorage.GetSprite("Campaign/BlankConnectorHorizontal");
-                EnabledSprite = SpriteStorage.GetSprite("Campaign/FilledConnectorHorizontal");
+                NotEnabledSprite = SpriteStorage.GetSprite("BlankConnectorHorizontal");
+                EnabledSprite = SpriteStorage.GetSprite("FilledConnectorHorizontal");
             }
         }
     }
