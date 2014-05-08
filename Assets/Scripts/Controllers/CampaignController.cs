@@ -139,7 +139,7 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         {
             for (int x = 0; x < Room.Width; x++)
             {
-                if ((y >= Room.Height - 2 || y <= 1) && Math.Abs(x - Room.Width / 2) > 1)
+                if ( true || (y >= Room.Height - 2 || y <= 1) && Math.Abs(x - Room.Width / 2) > 1)
                 {
                     room.SetTerrain(x,y,BlockedTerrain);
                 }

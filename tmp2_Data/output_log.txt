@@ -1,0 +1,396 @@
+Initialize engine version: 4.3.4f1 (e444f76e01cd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [igdumdim32.dll 10.18.10.3262]
+    Renderer: Intel(R) HD Graphics 4000 (Intel Corporation - WDDM 1.3)
+    Vendor:   Intel
+    VRAM:     912 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 RAWZ=0 NULL=1 RESZ=1 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Mono.Data.dll (this message is harmless)
+Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Mono.Data.dll into Unity Child Domain
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Mono.Data.Sqlite.dll (this message is harmless)
+Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Mono.Data.Sqlite.dll into Unity Child Domain
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Mono.Data.SqliteClient.dll (this message is harmless)
+Loading C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\Mono.Data.SqliteClient.dll into Unity Child Domain
+- Completed reload, in  0.102 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\System.dll (this message is harmless)
+Character sprite Human
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human10
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human11
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human12
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human13
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human3
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human4
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human5
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human7
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human8
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite Human9
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Character sprite knight
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded 10die2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded 20die2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded 4die3
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded 6die2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded 8die2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human10
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human11
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human12
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human13
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human3
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human4
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human5
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human7
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human8
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Human9
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded knight
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded BlackTile
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded NormalTile
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded poi1
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded poi2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded poi3
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded poi4
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded RailHorizontal
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded RailVertical
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Dwarf1
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Dwarf2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded EarthElemental
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded GoblinMage
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded GoblinWarrior
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded GoblinWarrior2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded GreenDragon
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded minotaur
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Spider1
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded Spider2
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded wererat
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded BlankConnectorHorizontal
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded BlankConnectorVertical
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded BlankRoom
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded FilledConnectorHorizontal
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded FilledConnectorVertical
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded InvisibleRoom
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded PopulatedRoom
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Loaded VisibleRoom
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+234.74
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\System.Data.dll (this message is harmless)
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\System.Transactions.dll (this message is harmless)
+Platform assembly: C:\Users\Michael\Documents\GitHub\UnityFinder\tmp2_Data\Managed\System.Xml.dll (this message is harmless)
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/sqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/.\libsqlite3
+Fallback handler could not load library C:/Users/Michael/Documents/GitHub/UnityFinder/tmp2_Data/Mono/libsqlite3
+DllNotFoundException: sqlite3
+  at (wrapper managed-to-native) Mono.Data.SqliteClient.Sqlite:sqlite3_open16 (string,intptr&)
+  at Mono.Data.SqliteClient.SqliteConnection.Open () [0x00000] in <filename unknown>:0 
+  at AssemblyCSharp.Database.runSelectQuery (Mono.Data.SqliteClient.SqliteConnection connection, Mono.Data.SqliteClient.SqliteCommand command) [0x00000] in <filename unknown>:0 
+  at TerrainStorage.LoadTerrains () [0x00000] in <filename unknown>:0 
+  at TerrainStorage.GetTerrain (System.String name) [0x00000] in <filename unknown>:0 
+  at CampaignController.InitializeRoom () [0x00000] in <filename unknown>:0 
+  at CampaignController.CreateRoom (Int32 gridX, Int32 gridY) [0x00000] in <filename unknown>:0 
+  at RoomDropdown.OnGUI () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+448.14
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+DllNotFoundException: sqlite3
+  at (wrapper managed-to-native) Mono.Data.SqliteClient.Sqlite:sqlite3_open16 (string,intptr&)
+  at Mono.Data.SqliteClient.SqliteConnection.Open () [0x00000] in <filename unknown>:0 
+  at AssemblyCSharp.Database.runSelectQuery (Mono.Data.SqliteClient.SqliteConnection connection, Mono.Data.SqliteClient.SqliteCommand command) [0x00000] in <filename unknown>:0 
+  at TerrainStorage.LoadTerrains () [0x00000] in <filename unknown>:0 
+  at TerrainStorage.GetTerrain (System.String name) [0x00000] in <filename unknown>:0 
+  at CampaignController.InitializeRoom () [0x00000] in <filename unknown>:0 
+  at CampaignController.CreateRoom (Int32 gridX, Int32 gridY) [0x00000] in <filename unknown>:0 
+  at RoomDropdown.OnGUI () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Connecting with username GM
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Connected -1 - GM
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+Changed 0.6221855
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+DllNotFoundException: sqlite3
+  at (wrapper managed-to-native) Mono.Data.SqliteClient.Sqlite:sqlite3_open16 (string,intptr&)
+  at Mono.Data.SqliteClient.SqliteConnection.Open () [0x00000] in <filename unknown>:0 
+  at AssemblyCSharp.Database.runSelectQuery (Mono.Data.SqliteClient.SqliteConnection connection, Mono.Data.SqliteClient.SqliteCommand command) [0x00000] in <filename unknown>:0 
+  at TerrainStorage.LoadTerrains () [0x00000] in <filename unknown>:0 
+  at TerrainStorage.GetTerrains () [0x00000] in <filename unknown>:0 
+  at RemoteView.SendTerrains () [0x00000] in <filename unknown>:0 
+  at RemoteView.Initiate () [0x00000] in <filename unknown>:0 
+  at SessionManager.StartServer () [0x00000] in <filename unknown>:0 
+  at CampaignEditorPanel.OnGUI () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+554.84
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
+DllNotFoundException: sqlite3
+  at (wrapper managed-to-native) Mono.Data.SqliteClient.Sqlite:sqlite3_open16 (string,intptr&)
+  at Mono.Data.SqliteClient.SqliteConnection.Open () [0x00000] in <filename unknown>:0 
+  at AssemblyCSharp.Database.runSelectQuery (Mono.Data.SqliteClient.SqliteConnection connection, Mono.Data.SqliteClient.SqliteCommand command) [0x00000] in <filename unknown>:0 
+  at TerrainStorage.LoadTerrains () [0x00000] in <filename unknown>:0 
+  at TerrainStorage.GetTerrain (System.String name) [0x00000] in <filename unknown>:0 
+  at CampaignController.InitializeRoom () [0x00000] in <filename unknown>:0 
+  at CampaignController.CreateRoom (Int32 gridX, Int32 gridY) [0x00000] in <filename unknown>:0 
+  at RoomDropdown.OnGUI () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Adding character
+ 
+(Filename: C:/BuildAgent/work/d3d49558e4d408f4/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 53)
+
