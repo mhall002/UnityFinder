@@ -197,13 +197,13 @@ public class MapGrid : MonoBehaviour {
 	static float spacing = 0.75f;
 	public static Vector3 GetPosition(int x, int y)
 	{
-		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f,
+		return new Vector3 (-Room.Width / 2 + (Room.Width * spacing) * x - 10.2f/2,
 		                    -Room.Height / 2 + (Room.Height * spacing) * y - 4.6f, 0);
 	}
 
     public static Vector3 GetPosition(Vector4 position)
     {
-        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * position.x - 10.2f - 9.5f,
+        return new Vector3(-Room.Width / 2 + (Room.Width * spacing) * position.x - 10.2f/2 - 9.5f,
                             -Room.Height / 2 + (Room.Height * spacing) * position.y - 4.6f - 4.2f, 0) + new Vector3(spacing * position.z, spacing * position.w);
     }
 

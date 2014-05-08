@@ -18,6 +18,7 @@ public class ChatView : MonoBehaviour {
     bool SendText = false;
     int Roll = 0;
     bool SendRoll = false;
+    ChatMessage lastMessage = null;
 
     void OnGUI()
     {
@@ -49,6 +50,11 @@ public class ChatView : MonoBehaviour {
         {
             SendRoll = true;
             Roll = 20;
+        }
+        if (ChatController.Messages.Count > 0 && lastMessage != ChatController.Messages[ChatController.Messages.Count-1])
+        {
+            lastMessage = ChatController.Messages[ChatController.Messages.Count - 1];
+            ScrollPosition = new Vector2(0, 500000);
         }
         GUILayout.EndHorizontal();
         GUILayout.BeginScrollView(ScrollPosition);

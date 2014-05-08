@@ -10,7 +10,7 @@ namespace Assets.Scripts.Models
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public static int Width = 26;
+        public static int Width = 12;
         public static int Height = 12;
 
         public int X;
