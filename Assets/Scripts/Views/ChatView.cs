@@ -101,7 +101,7 @@ public class ChatView : MonoBehaviour {
                 if (TextInput.StartsWith("/r") || TextInput.StartsWith("/roll"))
                 {
                     int i = 0;
-                    while (TextInput[i] != ' ')
+                    while (TextInput[i] != ' ') 
                     {
                         i++;
                     }
