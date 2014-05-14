@@ -3,6 +3,7 @@ using System.Collections;
 using Assets.Scripts.Models;
 using System.ComponentModel;
 using System;
+using Assets.Scripts.Storage;
 
 public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
 
@@ -72,6 +73,13 @@ public class CampaignController : MonoBehaviour, INotifyPropertyChanged {
         Campaign.Entities.Remove(entity);
         Debug.Log("Deleting " + Campaign.Entities.Count);
         Campaign.EntityChanged(uid);
+    }
+
+
+    public void SaveCampaignToDatabase()
+    {
+        CampaignStorage storage = new CampaignStorage();
+        storage.SaveCampaign(Campaign);
     }
 
     public void DeleteCharacter(Entity character)

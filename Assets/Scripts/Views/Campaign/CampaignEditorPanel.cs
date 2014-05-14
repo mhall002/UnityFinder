@@ -6,6 +6,8 @@ public class CampaignEditorPanel : MonoBehaviour {
 
     public ViewController ViewController;
     public SessionManager SessionManager;
+    public CampaignController CampaignController;
+    
 
 	// Use this for initialization
     void Start()
@@ -38,7 +40,11 @@ public class CampaignEditorPanel : MonoBehaviour {
             }
             if (GUI.Button(GetButtonRect(), "Save"))
             {
-                Database database = new Database();
+                if (!SessionManager.IsClient)
+                {
+                    CampaignController.SaveCampaignToDatabase();
+                }
+                
             }
             if (GUI.Button(GetButtonRect(), "Load"))
             {

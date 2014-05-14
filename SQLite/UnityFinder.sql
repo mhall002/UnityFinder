@@ -9,7 +9,7 @@ drop table if exists EntityAbility;
 
 drop table if exists Ability;
 drop table if exists Campaign;
-drop table if exists CampaignEntity;
+drop table if exists CampaignCharacter;
 drop table if exists CampaignRoomLink;
 drop table if exists Room;
 drop table if exists RoomEntity;
@@ -37,9 +37,11 @@ values ('It''s not a mat!', 'd', 'RailHorizontal', 'Normal3', 1);
 
 create table Room(
 	ID integer NOT NULL primary key,
+	CampaignID integer NOT NULL,
 	XPWorth integer,
 	TerrainGridString varchar(255),
-	Visible boolean
+	Visible boolean,
+	foreign key (CampaignID) references Campaign(ID)
 ); 
 
 create table Entity (
@@ -70,6 +72,14 @@ create table RoomEntity (
 	Y integer,
 	PRIMARY KEY (RoomID, EntityID),
 	foreign key (RoomID) references Room(ID),
+	foreign key (EntityID) references Entity(ID)
+);
+
+create table CampaignCharacter (
+	CampaignID integer NOT NULL,
+	EntityID integer NOT NULL,
+	PRIMARY KEY(CampaignID, EntityID),
+	foreign key (CampaignID) references Campaign(ID),
 	foreign key (EntityID) references Entity(ID)
 );
 commit;
